@@ -1,0 +1,87 @@
+
+<form class="task-form" #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
+  <div id="pageContainer" class="container">
+    <input type="hidden" name="TaskID" #TaskID="ngModel" [(ngModel)]="sharedService.selectedTask.TaskID">
+    <div class="row">
+        <div class="col-md-2">
+            <label class="form-text ">Project </label>
+        </div>
+        <div class="form-group col-md-10">
+          <input class="form-control" name="ProjectName" #ProjectID="ngModel" [(ngModel)]="sharedService.selectedTask.ProjectID"
+            placeholder="Select Project" required>
+          <div class="validation-error" *ngIf="ProjectID.invalid && ProjectID.touched">Project Name is Required.</div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+          <label class="form-text ">Task </label>
+      </div>
+      <div class="form-group col-md-10">
+        <input class="form-control" name="TaskDesc" #TaskDesc="ngModel" [(ngModel)]="sharedService.selectedTask.TaskDesc"
+          placeholder="Task Description" required>
+        <div class="validation-error" *ngIf="TaskDesc.invalid && TaskDesc.touched">Task Description is Required.</div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+        <label class="form-text "></label>
+    </div>
+    <div class="form-group col-md-2">
+      <input class="form-control" type="checkbox" name="isParentTask" (change)="parentchecked($event)">
+    </div>
+    <div class="col-md-8">
+      <label class="form-text ">Parent Task</label>
+  </div>
+ </div>
+    <div class="row">
+      <div class=" form-group col-md-2">
+            <label class="form-text">Priority</label>
+      </div>
+      <div class="form-group col-md-8">
+        <label class="form-text">0</label><input class="form-control" name="Priority" (input)="priorityValueChanged($event.target.value)" type="range" min="0" max="30" value="sharedService.selectedTask.Priority">
+      </div>
+      <div class="form-group col-md-2 leftaling maxprioritymargin "><label class="form-text">30</label></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+          <label class="form-text ">Parent Task</label>
+      </div>
+      <div class="form-group col-md-10">
+        <input class="form-control" name="ParentID" #ParentID="ngModel" [(ngModel)]="sharedService.selectedTask.ParentID" >
+      </div>
+  </div>
+    <div class="row">
+       <div class="col-md-2">
+        <label class="form-text">Start Date</label>
+       </div>
+      <div class="form-group col-md-4">
+        <input class="form-control" name="StartDate" #StartDate="ngModel" [(ngModel)]="sharedService.selectedTask.StartDate" placeholder="Start Date">
+      </div>
+      <div class="col-md-2">
+          <label class="form-text">End Date</label>
+         </div>
+      <div class="form-group col-md-4">
+          <input class="form-control" name="EndDate" #EndDate="ngModel" [(ngModel)]="sharedService.selectedTask.EndDate" placeholder="End Date" >
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+          <label class="form-text ">User </label>
+      </div>
+      <div class="form-group col-md-10">
+        <input class="form-control" name="UserID" #ProjectName="ngModel" [(ngModel)]="sharedService.selectedTask.UserID" placeholder="Select User" >
+      </div>
+  </div>
+    <div class="row">
+      <div class="form-group col-md-2">
+        <button type="submit" class="btn btn-block btn-lg btn-info">
+          <i class="fa fa-floppy-o"></i> Add Task</button>
+      </div>
+      <div class="form-group col-md-2">
+        <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(taskForm)">
+          <i class="fa fa-repeat"></i> Reset</button>
+      </div>
+    </div>
+  </div>
+  </form>
+

@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <h4> Project Details</h4>
+  <div class="table-responsive table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Parent Task</th>
+          <th>Priority</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of sharedService.taskList">
+          <td>{{task.TaskDesc}}</td>
+          <td>{{task.Priority}}</td>
+          <td>{{task.ParentID}}</td>
+          <td>{{task.StartDate}}</td>
+          <td>{{task.EndDate}}</td>
+          <td>
+            <button (click)="EndTask(task.TaskID)" class="btn btn-info">End Task</button>
+            <button (click)="editTask(task)" style="margin-left: 20px;" class="btn btn-info">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+
+<form class="project-form" #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm)">
+<div id="pageContainer" class="container">
+  <input type="hidden" name="ProjectID" #EmployeeID="ngModel" [(ngModel)]="sharedService.selectedProject.ProjectID">
+  <div class="row">
+      <div class="col-md-2">
+          <label class="form-text ">Project </label>
+      </div>
+      <div class="form-group col-md-10">
+        <input class="form-control" name="ProjectName" #ProjectName="ngModel" [(ngModel)]="sharedService.selectedProject.ProjectName"
+          placeholder="Project Name" required>
+        <div class="validation-error" *ngIf="ProjectName.invalid && ProjectName.touched">Project Name is Required.</div>
+      </div>
+  </div>
+  <div class="row">
+     <div class="col-md-2">
+      <label class="form-text">Start Date</label>
+     </div>
+    <div class="form-group col-md-4">
+      <input class="form-control" name="StartDate" #StartDate="ngModel" [(ngModel)]="sharedService.selectedProject.StartDate" placeholder="Start Date"
+        required>
+      <div class="validation-error" *ngIf="StartDate.invalid && StartDate.touched">Start Date is Required.</div>
+    </div>
+    <div class="col-md-2">
+        <label class="form-text">End Date</label>
+       </div>
+    <div class="form-group col-md-4">
+        <input class="form-control" name="EndDate" #EndDate="ngModel" [(ngModel)]="sharedService.selectedProject.EndDate" placeholder="End Date" required>
+        <div class="validation-error" *ngIf="EndDate.invalid && EndDate.touched">End Date  is Required.</div>
+      </div>
+  </div>
+  <div class="row">
+    <div class=" form-group col-md-2">
+          <label class="form-text">Priority</label>
+    </div>
+    <div class="form-group col-md-8">
+      <label class="form-text">0</label><input class="form-control" name="Priority" (input)="priorityValueChanged($event.target.value)" type="range" min="0" max="30" value="sharedService.selectedProject.Priority">
+    </div>
+    <div class="form-group col-md-2 leftaling maxprioritymargin "><label class="form-text">30</label></div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-2">
+      <button [disabled]="!projectForm.valid" type="submit" class="btn btn-block btn-lg btn-info">
+        <i class="fa fa-floppy-o"></i> Submit</button>
+    </div>
+    <div class="form-group col-md-2">
+      <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(projectForm)">
+        <i class="fa fa-repeat"></i> Reset</button>
+    </div>
+  </div>
+</div>
+</form>
