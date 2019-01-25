@@ -11,7 +11,7 @@ namespace TestWebApi
     {
         public static void Register(HttpConfiguration config)
         {
-            config.EnableCors(new EnableCorsAttribute("http://localhost:4200", headers: "*", methods: "*"));
+            //config.EnableCors(new EnableCorsAttribute("http://localhost:4200", headers: "*", methods: "*"));
             // Web API configuration and services
             var enableCorsAttribute = new EnableCorsAttribute("*",
                                            "Origin, Content-Type, Accept",

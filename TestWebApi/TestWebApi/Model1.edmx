@@ -57,21 +57,11 @@
     <edmx:ConceptualModels>
       <Schema Namespace="masterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="masterEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Projects" EntityType="masterModel.Project" />
           <EntitySet Name="Users" EntityType="masterModel.User" />
-          <EntitySet Name="Tasks" EntityType="masterModel.Task" />
           <EntitySet Name="ParentTasks" EntityType="masterModel.ParentTask" />
-        </EntityContainer>
-        <EntityType Name="Project">
-          <Key>
-            <PropertyRef Name="ProjectID" />
-          </Key>
-          <Property Name="ProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="Priority" Type="Int32" />
-        </EntityType>
+          <EntitySet Name="Projects" EntityType="masterModel.Project" />
+          <EntitySet Name="Tasks" EntityType="masterModel.Task" />
+          </EntityContainer>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserID" />
@@ -82,6 +72,23 @@
           <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProjectID" Type="Int32" />
           <Property Name="TaskID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ParentTask">
+          <Key>
+            <PropertyRef Name="ParentID" />
+          </Key>
+          <Property Name="ParentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Priority" Type="Int32" />
         </EntityType>
         <EntityType Name="Task">
           <Key>
@@ -96,30 +103,12 @@
           <Property Name="Priority" Type="Int32" />
           <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="ParentTask">
-          <Key>
-            <PropertyRef Name="ParentID" />
-          </Key>
-          <Property Name="ParentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TaskDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="masterModelStoreContainer" CdmEntityContainer="masterEntities">
-          <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="masterModel.Project">
-              <MappingFragment StoreEntitySet="Project">
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="masterModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -129,6 +118,25 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParentTasks">
+            <EntityTypeMapping TypeName="masterModel.ParentTask">
+              <MappingFragment StoreEntitySet="ParentTask">
+                <ScalarProperty Name="TaskDesc" ColumnName="TaskDesc" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="masterModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -146,15 +154,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ParentTasks">
-            <EntityTypeMapping TypeName="masterModel.ParentTask">
-              <MappingFragment StoreEntitySet="ParentTask">
-                <ScalarProperty Name="TaskDesc" ColumnName="TaskDesc" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

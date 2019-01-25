@@ -1,17 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="masterModelStoreContainer" CdmEntityContainer="masterEntities">
-    <EntitySetMapping Name="Projects">
-      <EntityTypeMapping TypeName="masterModel.Project">
-        <MappingFragment StoreEntitySet="Project">
-          <ScalarProperty Name="Priority" ColumnName="Priority" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="masterModel.User">
         <MappingFragment StoreEntitySet="User">
@@ -21,6 +10,25 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ParentTasks">
+      <EntityTypeMapping TypeName="masterModel.ParentTask">
+        <MappingFragment StoreEntitySet="ParentTask">
+          <ScalarProperty Name="TaskDesc" ColumnName="TaskDesc" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="masterModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -35,14 +43,6 @@
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="ParentID" ColumnName="ParentID" />
           <ScalarProperty Name="TaskID" ColumnName="TaskID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ParentTasks">
-      <EntityTypeMapping TypeName="masterModel.ParentTask">
-        <MappingFragment StoreEntitySet="ParentTask">
-          <ScalarProperty Name="TaskDesc" ColumnName="TaskDesc" />
-          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

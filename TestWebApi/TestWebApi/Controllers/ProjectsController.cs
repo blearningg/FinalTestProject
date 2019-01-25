@@ -10,32 +10,49 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using TestWebApi;
+using TestWebApi.Models;
 
 namespace TestWebApi.Controllers
 {
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+  
     public class ProjectsController : ApiController
     {
         private masterEntities db = new masterEntities();
 
         // GET: api/Projects
-        public IQueryable<Project> GetProjects()
+        public IEnumerable<ProjectViewModel> GetProjects()
         {
-            return db.Projects;
-        }
+            List<ProjectViewModel> lstProject = new List<ProjectViewModel>();
 
-        // GET: api/Projects/5
-        [ResponseType(typeof(Project))]
-        public IHttpActionResult GetProject(int id)
-        {
-            Project project = db.Projects.Find(id);
-            if (project == null)
+            foreach (Project proj in db.Projects)
             {
-                return NotFound();
-            }
+                ProjectViewModel obj = new ProjectViewModel();
+                obj.ProjectID = proj.ProjectID;
+                obj.ProjectName = proj.ProjectName;
+                obj.StartDate = proj.StartDate;
+                obj.EndDate = proj.EndDate;
+                obj.Priority = proj.Priority;
+                obj.TotalTasks = db.Tasks.Where(x => x.ProjectID == proj.ProjectID).Count() ;
+                obj.CompletedTasks = db.Tasks.Where(x => x.ProjectID == proj.ProjectID && x.Status=="Completed").Count();
 
-            return Ok(project);
+                lstProject.Add(obj);
+            }
+            //return db.Projects;
+            return lstProject.ToList();
         }
+
+        //// GET: api/Projects/5
+        //[ResponseType(typeof(Project))]
+        //public IHttpActionResult GetProject(int id)
+        //{
+        //    Project project = db.Projects.Find(id);
+        //    if (project == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(project);
+        //}
 
         // PUT: api/Projects/5
         [ResponseType(typeof(void))]
