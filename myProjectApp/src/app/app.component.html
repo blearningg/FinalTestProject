@@ -2,7 +2,16 @@
   <h2>
       Welcome to {{ title }}!
   </h2>
-<app-menu></app-menu>
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="nav navbar-light bg-light">
+          <li ><a class="navbar-brand" [routerLink]="['/projects']">Add Project</a></li>
+          <li ><a class="navbar-brand" [routerLink]="['/task']">Add Task</a></li>
+          <li><a class="navbar-brand" [routerLink]="['/users']">Add User</a></li>
+          <li ><a class="navbar-brand" [routerLink]="['/tasklist']">View Task</a></li>
+      </ul>
+    </div>
+    </div>
 <hr>
 <router-outlet></router-outlet>
 </div>

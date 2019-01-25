@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/shared.service';
 import { NgForm } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SearchProjectComponent } from 'src/app/projects/search-project/search-project.component';
 
 
 @Component({
@@ -11,13 +13,38 @@ import { NgForm } from '@angular/forms';
 export class TaskComponent implements OnInit {
 
   isParentTask: boolean = false;
-  constructor(private sharedService: SharedService) { }
+  constructor(private sharedService: SharedService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    if (this.sharedService.selectedTask.TaskID != null) {
+    this.sharedService.getProject();
+    this.sharedService.getParentTasks();
+    this.sharedService.getUsers();
+    // console.log('onload task id' + this.sharedService.selectedTask.TaskID);
+    // if (this.sharedService.selectedTask.TaskID != null) {
       this.resetForm();
-    }
+    // }
   }
+  open() {
+     const modalRef = this.modalService.open(SearchProjectComponent);
+     modalRef.componentInstance.title = 'Search Project';
+    // this.modalService.open(ModalProjectComponent).result.then((result) => {
+    //  this.sharedService.selectedTask.ProjectName = `Project: ${result}`;
+    // });
+  }
+ /*open() {
+    this.modalService.open(ModalProjectComponent).result.then((result) => {
+      this.sharedService.selectedTask.ProjectName = `Project: ${result}`;
+    });
+
+  }
+   open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.sharedService.selectedTask.ProjectName = `Project: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+*/
 
   resetForm(form?: NgForm) {
     if (form != null) {
@@ -33,7 +60,10 @@ export class TaskComponent implements OnInit {
         StartDate: '',
         EndDate: '',
         Priority: null,
-        Status: ''
+        Status: '',
+        ParentTaskDesc: '',
+        ProjectName: '',
+        UserID: null,
     };
   }
 
@@ -50,10 +80,12 @@ export class TaskComponent implements OnInit {
 }
 
   onSubmit(form: NgForm) {
+    console.log('submit call');
     if (this.isParentTask) {
           this.sharedService.AddParentTask(form.value)
           .subscribe(data => {
             this.resetForm(form);
+            this.sharedService.getParentTasks();
             alert('parent task record saved');
           },
           error => {
@@ -69,9 +101,10 @@ export class TaskComponent implements OnInit {
               this.sharedService.selectedTask.StartDate = form.value.StartDate;
               this.sharedService.selectedTask.EndDate = form.value.EndDate;
               this.sharedService.selectedTask.Priority = form.value.Priority;
-              this.sharedService.selectedTask.Status = form.value.Status;
+              this.sharedService.selectedTask.UserID = form.value.UserID;
 
-              if (form.value.ProjectID == null) {
+              if (form.value.TaskID == null) {
+                console.log('calling addtask.');
                     this.sharedService.AddTask(this.sharedService.selectedTask)
                   .subscribe(data => {
                     this.resetForm(form);

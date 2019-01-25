@@ -6,6 +6,7 @@
         <tr>
           <th>Task</th>
           <th>Parent Task</th>
+          <th>Project Name</th>
           <th>Priority</th>
           <th>Start Date</th>
           <th>End Date</th>
@@ -14,8 +15,9 @@
       <tbody>
         <tr *ngFor="let task of sharedService.taskList">
           <td>{{task.TaskDesc}}</td>
+          <td>{{task.ParentTaskDesc}}</td>
+          <td>{{task.ProjectName}}</td>
           <td>{{task.Priority}}</td>
-          <td>{{task.ParentID}}</td>
           <td>{{task.StartDate}}</td>
           <td>{{task.EndDate}}</td>
           <td>

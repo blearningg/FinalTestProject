@@ -32,7 +32,9 @@ export class ProjectComponent implements OnInit {
       ProjectName: '',
       StartDate: '',
       EndDate: '',
-      Priority: ''
+      Priority: '',
+      TotalTasks: null,
+      CompletedTasks: null,
     };
   }
 

@@ -7,5 +7,8 @@ export class Task {
   EndDate: string;
   Priority: number;
   Status: string;
+  ParentTaskDesc: string;
+  ProjectName: string;
+  UserID: number;
 }
 

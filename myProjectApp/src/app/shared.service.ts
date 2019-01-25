@@ -104,6 +104,7 @@ EndTask(id: number) {
 }
 
 AddTask(task: Task) {
+  console.log('calling service addtask.');
 return this.httpClient.post(this.SERVICE_URL + '/Tasks', task);
 }
 
@@ -115,7 +116,7 @@ updateTask(task: Task) {
 getParentTasks() {
   return this.httpClient.get(this.SERVICE_URL + '/ParentTasks').subscribe((data: any[]) => {
     console.log(data);
-    // this.parentTaskList = data;
+  this.parentTaskList = data;
   },
   error => {
     console.log('Error on service getParentTasks call:');

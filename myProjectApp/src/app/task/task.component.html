@@ -6,17 +6,22 @@
         <div class="col-md-2">
             <label class="form-text ">Project </label>
         </div>
-        <div class="form-group col-md-10">
-          <input class="form-control" name="ProjectName" #ProjectID="ngModel" [(ngModel)]="sharedService.selectedTask.ProjectID"
-            placeholder="Select Project" required>
-          <div class="validation-error" *ngIf="ProjectID.invalid && ProjectID.touched">Project Name is Required.</div>
+        <div class="form-group col-md-8">
+          <select required name="ProjectID" #ProjectID="ngModel" class="form-control" [(ngModel)]="sharedService.selectedTask.ProjectID">
+          <option value="undefined">Please select Project</option>
+          <option *ngFor="let project of sharedService.projectList"
+                  [ngValue]="project.ProjectID">
+              {{project.ProjectName}}
+          </option>
+          </select>
+          <div class="validation-error" *ngIf="ProjectID.invalid && ProjectID.touched">Project is Required.</div>
         </div>
     </div>
     <div class="row">
       <div class="col-md-2">
           <label class="form-text ">Task </label>
       </div>
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-8">
         <input class="form-control" name="TaskDesc" #TaskDesc="ngModel" [(ngModel)]="sharedService.selectedTask.TaskDesc"
           placeholder="Task Description" required>
         <div class="validation-error" *ngIf="TaskDesc.invalid && TaskDesc.touched">Task Description is Required.</div>
@@ -24,14 +29,11 @@
   </div>
   <div class="row">
     <div class="col-md-2">
-        <label class="form-text "></label>
+        <label class="form-text">Parent Task</label>
     </div>
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-6">
       <input class="form-control" type="checkbox" name="isParentTask" (change)="parentchecked($event)">
     </div>
-    <div class="col-md-8">
-      <label class="form-text ">Parent Task</label>
-  </div>
  </div>
     <div class="row">
       <div class=" form-group col-md-2">
@@ -46,8 +48,14 @@
       <div class="col-md-2">
           <label class="form-text ">Parent Task</label>
       </div>
-      <div class="form-group col-md-10">
-        <input class="form-control" name="ParentID" #ParentID="ngModel" [(ngModel)]="sharedService.selectedTask.ParentID" >
+      <div class="form-group col-md-8">
+        <select  name="ParentID" #ParentID="ngModel" class="form-control" [(ngModel)]="sharedService.selectedTask.ParentID">
+          <option value="undefined">Please select Parent Task</option>
+          <option *ngFor="let parenttask of sharedService.parentTaskList"
+                  [ngValue]="parenttask.ParentID">
+              {{parenttask.TaskDesc}}
+          </option>
+          </select>
       </div>
   </div>
     <div class="row">
@@ -68,16 +76,23 @@
       <div class="col-md-2">
           <label class="form-text ">User </label>
       </div>
-      <div class="form-group col-md-10">
-        <input class="form-control" name="UserID" #ProjectName="ngModel" [(ngModel)]="sharedService.selectedTask.UserID" placeholder="Select User" >
+      <div class="form-group col-md-8">
+          <select required name="UserID" #UserID="ngModel" class="form-control" [(ngModel)]="sharedService.selectedTask.UserID">
+          <option value="undefined">Please select User</option>
+          <option *ngFor="let user of sharedService.userList"
+                  [ngValue]="user.UserID">
+              {{user.FirstName}}  {{user.LastName}}
+          </option>
+          </select>
+          <div class="validation-error" *ngIf="UserID.invalid && UserID.touched">User is Required.</div>
       </div>
   </div>
     <div class="row">
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-4">
         <button type="submit" class="btn btn-block btn-lg btn-info">
           <i class="fa fa-floppy-o"></i> Add Task</button>
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-4">
         <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(taskForm)">
           <i class="fa fa-repeat"></i> Reset</button>
       </div>

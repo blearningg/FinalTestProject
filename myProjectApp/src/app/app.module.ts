@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { TasksComponent } from './tasks/tasks.component';
 import { UsersComponent } from './users/users.component';
 import { ProjectComponent } from './projects/project/project.component';
 import { ProjectlistComponent } from './projects/projectlist/projectlist.component';
@@ -16,12 +15,16 @@ import { UserComponent } from './users/user/user.component';
 import { UserlistComponent } from './users/userlist/userlist.component';
 import { TaskComponent } from './task/task.component';
 import { TasklistComponent } from './tasklist/tasklist.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './modal/modal.component';
+import { SearchProjectComponent } from './projects/search-project/search-project.component';
+import { SearchUserComponent } from './users/search-user/search-user.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectsComponent,
-    TasksComponent,
     UsersComponent,
     ProjectComponent,
     ProjectlistComponent,
@@ -29,7 +32,10 @@ import { TasklistComponent } from './tasklist/tasklist.component';
     UserComponent,
     UserlistComponent,
     TaskComponent,
-    TasklistComponent
+    TasklistComponent,
+    ModalComponent,
+    SearchProjectComponent,
+    SearchUserComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +43,16 @@ import { TasklistComponent } from './tasklist/tasklist.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgbModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    NgbActiveModal,
+    ],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    SearchProjectComponent,
+    SearchUserComponent
+  ]
+
 })
 export class AppModule { }

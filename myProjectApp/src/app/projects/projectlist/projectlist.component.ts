@@ -18,6 +18,7 @@ export class ProjectlistComponent implements OnInit {
 
   ngOnInit() {
       this.sharedService.getProject();
+     // this.sharedService.getTasks();
     }
  deleteProject(id: number): void {
     this.sharedService.deleteProject(id)

@@ -1,31 +1,24 @@
+
 <div class="col-md-12">
-  <h4> Project Details</h4>
+  <h4>Select Project </h4>
   <div class="table-responsive table-container">
     <table class="table">
       <thead>
         <tr>
-          <th>Project ID</th>
           <th>Project Name</th>
           <th>Start Date</th>
           <th>End Date</th>
-          <th>Priority</th>
-          <th>Total Tasks</th>
-          <th>Completed Tasks</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let project of sharedService.projectList">
-          <td>{{project.ProjectID}}</td>
+          <td>
+            <button (click)="deleteProject(project.ProjectID)" class="btn btn-info"> Select</button>
+          </td>
           <td>{{project.ProjectName}}</td>
           <td>{{project.StartDate}}</td>
           <td>{{project.EndDate}}</td>
           <td>{{project.Priority}}</td>
-          <td>{{project.TotalTasks}}</td>
-          <td>{{project.CompletedTasks}}</td>
-          <td>
-            <button (click)="deleteProject(project.ProjectID)" class="btn btn-info"> Delete</button>
-            <button (click)="editProject(project)" style="margin-left: 20px;" class="btn btn-info"> Edit</button>
-          </td>
         </tr>
       </tbody>
     </table>
