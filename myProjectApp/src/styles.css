@@ -27,3 +27,8 @@ button:hover,a.btn:hover{
   margin-left: -50px;
 }
 
+.actionbtn
+{
+  margin: 5px;
+  width:80px;
+}

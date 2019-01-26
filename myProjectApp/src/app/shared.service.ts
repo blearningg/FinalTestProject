@@ -87,7 +87,7 @@ export class SharedService {
 /*Task service function */
 getTasks() {
   return this.httpClient.get(this.SERVICE_URL + '/Tasks').subscribe((data: any[]) => {
-    console.log(data);
+     console.log('data received');
     this.taskList = data;
   },
   error => {
@@ -109,7 +109,7 @@ updateTask(task: Task) {
 /*Parent Task service function */
 getParentTasks() {
   return this.httpClient.get(this.SERVICE_URL + '/ParentTasks').subscribe((data: any[]) => {
-    console.log(data);
+   // console.log(data);
   this.parentTaskList = data;
   },
   error => {
