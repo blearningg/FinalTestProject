@@ -16,8 +16,9 @@ export class TasklistComponent implements OnInit {
       this.sharedService.getTasks();
     }
 
- EndTask(id: number): void {
-    this.sharedService.EndTask(id)
+ EndTask(task: Task): void {
+     task.Status = 'Completed';
+    this.sharedService.updateTask(task)
       .subscribe(data => {
          this.sharedService.getTasks();
          // this.toastr.warning("Deleted Successfully","Employee Register");
@@ -29,9 +30,9 @@ export class TasklistComponent implements OnInit {
     );
   }
   editTask(task: Task): void {
-    this.sharedService.selectedTask = Object.assign({}, task);
-   // localStorage.removeItem('editProjId');
-   // localStorage.setItem('editProjId', project.ProjectID.toString());
+   // this.sharedService.selectedTask = Object.assign({}, task);
+    localStorage.removeItem('editTaskID');
+    localStorage.setItem('editTaskID', task.TaskID.toString());
    // this.router.navigate(['add-project']);
    console.log('selectedtask=' + task);
     this.router.navigate(['/task']);

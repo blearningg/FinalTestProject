@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-form.project-form{
-  background-color: #dbdbdb;
+form.form-style{
+  background-color: #eeecec;
   border-radius: 4px;
   padding: 10px;
 }
@@ -26,3 +26,4 @@ button:hover,a.btn:hover{
 .maxprioritymargin{
   margin-left: -50px;
 }
+

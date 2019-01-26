@@ -1,5 +1,5 @@
 
-<form class="project-form" #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm)">
+<form class="form-style" #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm)">
 <div id="pageContainer" class="container">
   <input type="hidden" name="ProjectID" #EmployeeID="ngModel" [(ngModel)]="sharedService.selectedProject.ProjectID">
   <div class="row">

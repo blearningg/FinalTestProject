@@ -1,33 +1,52 @@
 <div class="col-md-12">
   <h4> Project Details</h4>
   <div class="table-responsive table-container">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Project ID</th>
-          <th>Project Name</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Priority</th>
-          <th>Total Tasks</th>
-          <th>Completed Tasks</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let project of sharedService.projectList">
-          <td>{{project.ProjectID}}</td>
-          <td>{{project.ProjectName}}</td>
-          <td>{{project.StartDate}}</td>
-          <td>{{project.EndDate}}</td>
-          <td>{{project.Priority}}</td>
-          <td>{{project.TotalTasks}}</td>
-          <td>{{project.CompletedTasks}}</td>
-          <td>
-            <button (click)="deleteProject(project.ProjectID)" class="btn btn-info"> Delete</button>
-            <button (click)="editProject(project)" style="margin-left: 20px;" class="btn btn-info"> Edit</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <table class="table">
+          <tbody>
+            <tr *ngFor="let project of sharedService.projectList">
+              <td>
+                 <div class="Container">
+                   <div  class="row">
+                      <div class="col-md-8">
+                          <div class="container ProjDesc">
+                                <div class="row">
+                                    <div class="col-md-3">Project:</div>
+                                    <div class="col-md-4">{{project.ProjectID}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">Total Tasks:</div>
+                                    <div class="col-md-3">{{project.TotalTasks}}</div>
+                                    <div class="col-md-3">Completed Tasks:</div>
+                                    <div class="col-md-3">{{project.CompletedTasks}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">Start Date:</div>
+                                    <div class="col-md-3">{{project.StartDate}}</div>
+                                    <div class="col-md-3">End Date:</div>
+                                    <div class="col-md-3">{{project.EndDate}}</div>
+                                </div>
+                          </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="row">Priority</div>
+                        <div class="row"></div>
+                      </div>
+                      <div class="col-md-2">
+                          <div class="row"> <button (click)="deleteProject(project.ProjectID)" class="btn btn-info"> Delete</button></div>
+                          <div class="row"> <button (click)="editProject(project)" style="margin-left: 20px;" class="btn btn-info"> Edit</button></div>
+                      </div>
+              </div>
+            </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+
+    <div></div>
+
   </div>
 </div>

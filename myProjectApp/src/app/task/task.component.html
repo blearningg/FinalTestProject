@@ -1,5 +1,5 @@
 
-<form class="task-form" #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
+<form class="form-style" #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
   <div id="pageContainer" class="container">
     <input type="hidden" name="TaskID" #TaskID="ngModel" [(ngModel)]="sharedService.selectedTask.TaskID">
     <div class="row">
@@ -29,12 +29,13 @@
   </div>
   <div class="row">
     <div class="col-md-2">
-        <label class="form-text">Parent Task</label>
+        <label class="form-text"></label>
     </div>
-    <div class="form-group col-md-6">
-      <input class="form-control" type="checkbox" name="isParentTask" (change)="parentchecked($event)">
+    <div class="form-group col-md-4">
+        <label class="checkbox-inline"><input type="checkbox" name="isParentTask" (change)="parentchecked($event)">  Parent Task</label>
     </div>
- </div>
+  </div>
+  <div *ngIf="!isParentTask">
     <div class="row">
       <div class=" form-group col-md-2">
             <label class="form-text">Priority</label>
@@ -69,7 +70,7 @@
           <label class="form-text">End Date</label>
          </div>
       <div class="form-group col-md-4">
-          <input class="form-control" name="EndDate" #EndDate="ngModel" [(ngModel)]="sharedService.selectedTask.EndDate" placeholder="End Date" >
+          <input  class="form-control" name="EndDate" #EndDate="ngModel" [(ngModel)]="sharedService.selectedTask.EndDate" placeholder="End Date" >
         </div>
     </div>
     <div class="row">
@@ -87,10 +88,11 @@
           <div class="validation-error" *ngIf="UserID.invalid && UserID.touched">User is Required.</div>
       </div>
   </div>
+</div>
     <div class="row">
       <div class="form-group col-md-4">
-        <button type="submit" class="btn btn-block btn-lg btn-info">
-          <i class="fa fa-floppy-o"></i> Add Task</button>
+        <button type="submit" name="btnSubmit" class="btn btn-block btn-lg btn-info">
+          <i class="fa fa-floppy-o"></i>{{this.btnSubmitText}}</button>
       </div>
       <div class="form-group col-md-4">
         <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(taskForm)">
@@ -100,3 +102,10 @@
   </div>
   </form>
 
+
+  <script>
+    $(window).unload(function(){
+      localStorage.removeItem('editTaskID');
+    });
+
+  </script>

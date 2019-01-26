@@ -1,0 +1,22 @@
+.TaskDesc {
+  height: 90px;
+  background-color: #eeecec;
+  width: 250px;
+
+}
+
+.wd {
+  width: 150px;
+
+}
+
+.btnwd
+{
+  width:100px;
+}
+
+.actionbtn
+{
+  margin: 10px;
+  width:90px;
+}

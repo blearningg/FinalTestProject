@@ -1,5 +1,5 @@
 
-<form class="user-form" #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+<form class="form-style" #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
     <div id="pageContainer" class="container">
       <input type="hidden" name="UserID" #EmployeeID="ngModel" [(ngModel)]="sharedService.selectedUser.UserID">
       <div class="row">

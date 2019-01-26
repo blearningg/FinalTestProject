@@ -53,9 +53,7 @@ export class SharedService {
   AddProject(project: Project) {
   return this.httpClient.post(this.SERVICE_URL + '/Projects', project);
   }
-  getProjectById(id: number) {
-    return this.httpClient.get<Project>(this.SERVICE_URL + '/Projects/' + id);
-  }
+
   updateProject(project: Project) {
     return this.httpClient.put(this.SERVICE_URL + '/Projects/' + project.ProjectID, project);
   }
@@ -99,10 +97,6 @@ getTasks() {
   );
 }
 
-EndTask(id: number) {
- return this.httpClient.delete<Task[]>(this.SERVICE_URL + '/Tasks/' + id);
-}
-
 AddTask(task: Task) {
   console.log('calling service addtask.');
 return this.httpClient.post(this.SERVICE_URL + '/Tasks', task);
@@ -120,6 +114,17 @@ getParentTasks() {
   },
   error => {
     console.log('Error on service getParentTasks call:');
+    console.log(error);
+    }
+  );
+}
+
+getTaskById(id: number) {
+  return this.httpClient.get<Task>(this.SERVICE_URL + '/Tasks/' + id).subscribe((data: any) => {
+  this.selectedTask = data;
+  },
+  error => {
+    console.log('Error on service getTaskById call:');
     console.log(error);
     }
   );

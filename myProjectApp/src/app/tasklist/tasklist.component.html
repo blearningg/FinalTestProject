@@ -1,28 +1,29 @@
 <div class="col-md-12">
   <h4> Project Details</h4>
   <div class="table-responsive table-container">
-    <table class="table">
+    <table class="table padding" *ngFor="let task of sharedService.taskList">
       <thead>
         <tr>
           <th>Task</th>
           <th>Parent Task</th>
-          <th>Project Name</th>
           <th>Priority</th>
           <th>Start Date</th>
           <th>End Date</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let task of sharedService.taskList">
-          <td>{{task.TaskDesc}}</td>
-          <td>{{task.ParentTaskDesc}}</td>
-          <td>{{task.ProjectName}}</td>
+        <tr>
+          <td class="TaskDesc">{{task.TaskDesc}}</td>
+          <td class="TaskDesc">
+            <p *ngIf="task.ParentTaskDesc">{{task.ParentTaskDesc}}</p><p *ngIf="!task.ParentTaskDesc">No Parent Task Defined</p></td>
           <td>{{task.Priority}}</td>
-          <td>{{task.StartDate}}</td>
-          <td>{{task.EndDate}}</td>
-          <td>
-            <button (click)="EndTask(task.TaskID)" class="btn btn-info">End Task</button>
-            <button (click)="editTask(task)" style="margin-left: 20px;" class="btn btn-info">Edit</button>
+          <td >{{task.StartDate}}</td>
+          <td >{{task.EndDate}}</td>
+          <td >{{task.Status}}</td>
+          <td >
+            <button (click)="EndTask(task)" *ngIf="task.Status !='Completed'" class="btn  btn-info actionbtn ">End Task</button>
+            <button (click)="editTask(task)" style="margin-left: 20px;" class="btn  btn-info  actionbtn ">Edit</button>
           </td>
         </tr>
       </tbody>
