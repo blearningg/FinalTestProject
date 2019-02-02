@@ -72,9 +72,11 @@ C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\
 C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\bin\Microsoft.AI.Web.xml
-C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\obj\Release\TestWebApi.csprojResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\obj\Release\TestWebApi.dll
 C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\obj\Release\TestWebApi.pdb
 C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\bin\System.Web.Cors.dll
 C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\bin\System.Web.Http.Cors.dll
 C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\bin\System.Web.Http.Cors.xml
+C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\obj\Release\TestWebApi.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\obj\Release\TestWebApi.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\TestWebApi\obj\Release\TestWebApi.csproj.CopyComplete

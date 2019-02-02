@@ -27,10 +27,10 @@ namespace TestWebApi.Controllers
         public IHttpActionResult GetUser(int id)
         {
             User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
 
             return Ok(user);
         }
@@ -39,15 +39,6 @@ namespace TestWebApi.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != user.UserID)
-            {
-                return BadRequest();
-            }
 
             db.Entry(user).State = EntityState.Modified;
 
@@ -57,14 +48,7 @@ namespace TestWebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -85,11 +69,7 @@ namespace TestWebApi.Controllers
         public IHttpActionResult DeleteUser(int id)
         {
             User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
+            
             db.Users.Remove(user);
             db.SaveChanges();
 
@@ -105,9 +85,6 @@ namespace TestWebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserExists(int id)
-        {
-            return db.Users.Count(e => e.UserID == id) > 0;
-        }
+       
     }
 }

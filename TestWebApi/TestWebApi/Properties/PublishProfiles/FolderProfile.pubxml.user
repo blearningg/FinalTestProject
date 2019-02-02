@@ -79,6 +79,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>02/22/2013 08:43:40</publishTime>
     </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>02/22/2013 08:43:40</publishTime>
+    </File>
     <File Include="bin/ApplicationInsights.config">
       <publishTime>12/10/2018 03:37:58</publishTime>
     </File>
@@ -233,7 +236,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/TestWebApi.dll">
-      <publishTime>01/20/2019 11:35:56</publishTime>
+      <publishTime>01/31/2019 06:12:20</publishTime>
+    </File>
+    <File Include="bin/TestWebApi.pdb">
+      <publishTime>01/31/2019 06:12:20</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>09/10/2013 17:28:38</publishTime>
@@ -266,10 +272,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/10/2018 03:37:30</publishTime>
     </File>
     <File Include="Model1.edmx.diagram">
-      <publishTime>01/19/2019 06:35:48</publishTime>
+      <publishTime>01/31/2019 02:24:33</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>01/20/2019 10:09:10</publishTime>
+      <publishTime>01/28/2019 06:03:18</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>12/10/2018 03:37:36</publishTime>
@@ -311,7 +317,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/10/2018 03:37:30</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/20/2019 11:35:57</publishTime>
+      <publishTime>01/31/2019 03:00:42</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -1,0 +1,19 @@
+{
+  "TestRunner": "",
+  "TestPlatform": "x86",
+  "TestApartmentState": "STA",
+  "TestAdapterMode": "Standard",
+  "IsRedirectingFrameworkAssemblies": true,
+  "TestSettings": "",
+  "ExcludeAttributes": "System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute",
+  "ExcludeFiles": "",
+  "ExcludeDirectories": "",
+  "Filters": "+[TestWebApi*]* -[NunitApiTest]* -[*]TestWebApi.RouteConfig   -[*]TestWebApi.Areas* -[*]TestWebApi.BundleConfig -[*]TestWebApi.FilterConfig -[*]TestWebApi.WebApiConfig -[*]TestWebApi.WebApiApplication",
+  "IsIncludingSolutionAssemblies": false,
+  "IsExcludingTestAssemblies": false,
+  "IsCoveringByTest": true,
+  "IsMergingByHash": true,
+  "IsSkippingAutoProps": true,
+  "IsVisitorCountLimited": false,
+  "VisitorCountLimit": 10
+}

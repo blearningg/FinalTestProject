@@ -29,44 +29,31 @@ namespace TestWebApi.Controllers
                 ProjectViewModel obj = new ProjectViewModel();
                 obj.ProjectID = proj.ProjectID;
                 obj.ProjectName = proj.ProjectName;
-                obj.StartDate = proj.StartDate;
-                obj.EndDate = proj.EndDate;
+                obj.StartDate = proj.StartDate.ToString("MM/dd/yyyy");
+                obj.EndDate = proj.EndDate.ToString("MM/dd/yyyy");
                 obj.Priority = proj.Priority;
+                obj.Suspended = proj.Suspended;
                 obj.TotalTasks = db.Tasks.Where(x => x.ProjectID == proj.ProjectID).Count() ;
                 obj.CompletedTasks = db.Tasks.Where(x => x.ProjectID == proj.ProjectID && x.Status=="Completed").Count();
-
+                
                 lstProject.Add(obj);
             }
-            //return db.Projects;
+            
             return lstProject.ToList();
         }
 
         //// GET: api/Projects/5
-        //[ResponseType(typeof(Project))]
-        //public IHttpActionResult GetProject(int id)
-        //{
-        //    Project project = db.Projects.Find(id);
-        //    if (project == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(project);
-        //}
+        [ResponseType(typeof(Project))]
+        public IHttpActionResult GetProject(int id)
+        {
+            Project project = db.Projects.Find(id);
+            return Ok(project);
+        }
 
         // PUT: api/Projects/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProject(int id, Project project)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != project.ProjectID)
-            {
-                return BadRequest();
-            }
 
             db.Entry(project).State = EntityState.Modified;
 
@@ -76,14 +63,6 @@ namespace TestWebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -93,41 +72,10 @@ namespace TestWebApi.Controllers
         [ResponseType(typeof(Project))]
         public IHttpActionResult PostProject(Project project)
         {
-            try
-            {
-
-          
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-
             db.Projects.Add(project);
             db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
 
             return CreatedAtRoute("DefaultApi", new { id = project.ProjectID }, project);
-        }
-
-        // DELETE: api/Projects/5
-        [ResponseType(typeof(Project))]
-        public IHttpActionResult DeleteProject(int id)
-        {
-            Project project = db.Projects.Find(id);
-            if (project == null)
-            {
-                return NotFound();
-            }
-
-            db.Projects.Remove(project);
-            db.SaveChanges();
-
-            return Ok(project);
         }
 
         protected override void Dispose(bool disposing)
@@ -139,9 +87,9 @@ namespace TestWebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ProjectExists(int id)
-        {
-            return db.Projects.Count(e => e.ProjectID == id) > 0;
-        }
+        //private bool ProjectExists(int id)
+        //{
+        //    return db.Projects.Count(e => e.ProjectID == id) > 0;
+        //}
     }
 }

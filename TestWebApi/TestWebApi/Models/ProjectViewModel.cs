@@ -9,11 +9,13 @@ namespace TestWebApi.Models
     {
         public int ProjectID { get; set; }
         public string ProjectName { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
         public Nullable<int> Priority { get; set; }
 
         public Nullable<int> TotalTasks { get; set; }
         public Nullable<int> CompletedTasks { get; set; }
+
+        public Nullable<bool> Suspended { get; set; }
     }
 }

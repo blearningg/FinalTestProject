@@ -16,10 +16,10 @@ namespace TestWebApi
     {
         public int TaskID { get; set; }
         public Nullable<int> ParentID { get; set; }
-        public Nullable<int> ProjectID { get; set; }
+        public int ProjectID { get; set; }
         public string TaskDesc { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public System.DateTime EndDate { get; set; }
         public Nullable<int> Priority { get; set; }
         public string Status { get; set; }
     }

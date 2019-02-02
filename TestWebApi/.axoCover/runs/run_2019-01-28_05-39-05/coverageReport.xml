@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.6.0.0">
+  <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+  <Modules>
+    <Module hash="EE-92-34-AE-A6-A6-A8-2E-8A-34-A1-E4-20-3D-2A-23-C5-9D-D8-D2">
+      <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+      <ModulePath>C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\NunitApiTest\bin\Debug\nunit.framework.dll</ModulePath>
+      <ModuleTime>2018-10-06T11:22:56Z</ModuleTime>
+      <ModuleName>nunit.framework</ModuleName>
+      <Files />
+      <Classes />
+      <TrackedMethods />
+    </Module>
+    <Module hash="AA-89-29-00-AE-B0-8F-79-73-CD-DD-0A-CB-39-F5-98-BA-4B-EE-08">
+      <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+      <ModulePath>C:\Users\Admin\Desktop\b\Assignment\FinalAssigment\WebAPi\TestWebApi\NunitApiTest\bin\Debug\TestWebApi.dll</ModulePath>
+      <ModuleTime>2019-01-27T20:03:40.7179006Z</ModuleTime>
+      <ModuleName>TestWebApi</ModuleName>
+      <Files />
+      <Classes />
+      <TrackedMethods />
+    </Module>
+  </Modules>
+</CoverageSession>
