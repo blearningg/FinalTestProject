@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import { Response, Headers, RequestOptions, RequestMethod } from '@angular/common/http';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -16,29 +15,29 @@ import { Parenttask } from 'src/app/Models/parenttask.model';
 })
 export class SharedService {
 
-  SERVICE_URL = 'http://localhost:50243/api/';
+   // SERVICE_URL = 'http://localhost:50243/api/';
+  SERVICE_URL = 'http://localhost:8787/api/';
 
- // projects: Observable<Project[]>;
- // newProject: Observable<Project>;
+ // fmStartDateModal: any;
  selectedProject: Project;
- projectList: any[] = [];
-
+ projectList: Project[] = [];
+ filteredProjects: Project[] ;
  selectedUser: User;
  userList: User[] = [];
 
  selectedTask: Task;
- taskList: Task[] = [];
-
+ filteredTasks: Task[];
+ taskList: Task[];
 
   parentTaskList: Parenttask[] = [];
 
   constructor(private httpClient: HttpClient) { }
 
   getProject() {
-    // return this.http.get<Project[]>(this.SERVICE_URL + '/Projects');
     return this.httpClient.get(this.SERVICE_URL + '/Projects').subscribe((data: any[]) => {
-      console.log(data);
-      this.projectList = data;
+     // console.log(data);
+      this.projectList =  data;
+      this.filteredProjects = data;
     },
     error => {
       console.log('Error on service getProject call:');
@@ -47,8 +46,10 @@ export class SharedService {
     );
   }
 
-  deleteProject(id: number) {
-   return this.httpClient.delete<Project[]>(this.SERVICE_URL + '/Projects/' + id);
+  suspendProject(project: Project) {
+    console.log('update service call');
+    project.Suspended = true;
+    return this.httpClient.put(this.SERVICE_URL + '/Projects/' + project.ProjectID, project);
   }
   AddProject(project: Project) {
   return this.httpClient.post(this.SERVICE_URL + '/Projects', project);
@@ -85,13 +86,13 @@ export class SharedService {
 
 
 /*Task service function */
-getTasks() {
-  return this.httpClient.get(this.SERVICE_URL + '/Tasks').subscribe((data: any[]) => {
-     console.log('data received');
+getProjectTasks(projectId: number) {
+  return this.httpClient.get(this.SERVICE_URL + '/Tasks?projectID=' + projectId).subscribe((data: any[]) => {
     this.taskList = data;
+    this.filteredTasks = data;
   },
   error => {
-    console.log('Error on service getTasks call:');
+    console.log('Error on service getProjectTasks call:');
     console.log(error);
     }
   );
@@ -134,39 +135,4 @@ AddParentTask(task: Parenttask) {
 return this.httpClient.post(this.SERVICE_URL + '/ParentTasks', task);
 }
 
-  /*
-AddProject(proj: Project) {
-
-const headers = new HttpHeaders().set('content-type', 'application/json');
-const body = {
-                  PID: proj.ProjectID, PName: proj.ProjectName, StartDate: proj.StartDate, EndDate: proj.EndDate, Priority: proj.Priority
-           };
-
-return this.http.post<Project>(this.SERVICE_URL + '/Projects', proj, {headers});
-
-}
-
-EditProject(proj: Project) {
-  const params = new HttpParams().set('ID', proj.ProjectID);
-  const headers = new HttpHeaders().set('content-type', 'application/json');
-  // body = {
-  //  PID: proj.ProjectID, PName: proj.ProjectName, StartDate: proj.StartDate, EndDate: proj.EndDate, Priority: proj.Priority
-  //         };
-      return this.http.put<Project>(this.SERVICE_URL + '/Projects/' + proj.ProjectID, proj, {headers, params});
-
-}
-
-
-
-
-DeleteProject(proj:Project) {
-  const params = new HttpParams().set('ID', proj.ID);
-const headers = new HttpHeaders().set('content-type', 'application/json');
-let body = {
-                  Fname:proj.Fname, Lname:proj.Lname,Email:proj.Email,ID:proj.ID
-           };
-      return this.http.delete<Project>(SERVICE_URL + '/Projects/' + proj.ID);
-
-}
-*/
 }

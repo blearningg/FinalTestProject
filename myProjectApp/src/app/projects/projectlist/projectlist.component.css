@@ -1,3 +1,5 @@
+:host(app-projectlist) { width :70%}
+
 .backgrnd {
 
   background-color: #eeecec;
@@ -8,4 +10,31 @@
 
 .dvlst{
   margin-left: -10px;
+}
+
+.gridrow
+{
+  margin-top:15px;
+}
+
+/* hide the blue outline
+.form-control:focus {
+  outline: 0 !important;
+  border-color: initial;
+  box-shadow: none;
+}*/
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
 }

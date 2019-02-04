@@ -6,4 +6,5 @@ export class Project {
   Priority: string;
   TotalTasks: number;
   CompletedTasks: number;
+  Suspended: boolean;
 }

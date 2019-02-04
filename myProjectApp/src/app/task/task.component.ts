@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/shared.service';
 import { NgForm } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SearchProjectComponent } from 'src/app/projects/search-project/search-project.component';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+// import { SearchProjectComponent } from 'src/app/projects/search-project/search-project.component';
+import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Project } from 'src/app/Models/project.model';
+import { User } from 'src/app/Models/user.model';
+import { isObject } from 'util';
 
 
 @Component({
@@ -11,54 +15,53 @@ import { SearchProjectComponent } from 'src/app/projects/search-project/search-p
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-
+ // selectedProjectName: any;
+  selectedUserName: any;
+  modalReference: NgbModalRef;
   isParentTask: boolean = false;
   btnSubmitText: string = 'Add Task';
   constructor(private sharedService: SharedService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    const taskid = localStorage.getItem('editTaskID');
-    if (+taskid > 0) {
-      this.sharedService.getTaskById(+taskid);
+    if (isObject(this.sharedService.selectedTask)) {
       this.btnSubmitText = 'Update Task';
     } else {
-      console.log('reset call');
       this.resetForm();
     }
     this.sharedService.getProject();
     this.sharedService.getParentTasks();
     this.sharedService.getUsers();
   }
-  open() {
-     const modalRef = this.modalService.open(SearchProjectComponent);
-     modalRef.componentInstance.title = 'Search Project';
-    // this.modalService.open(ModalProjectComponent).result.then((result) => {
-    //  this.sharedService.selectedTask.ProjectName = `Project: ${result}`;
-    // });
-  }
- /*open() {
-    this.modalService.open(ModalProjectComponent).result.then((result) => {
-      this.sharedService.selectedTask.ProjectName = `Project: ${result}`;
-    });
 
-  }
-   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.sharedService.selectedTask.ProjectName = `Project: ${result}`;
-    }, (reason) => {
-      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-*/
+open(content) {
+  this.modalReference = this.modalService.open(content);
+  this.modalReference.result.then((result) => {
+   // this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
 
+selectProject(project: Project): void {
+  console.log('select call' + project);
+  this.sharedService.selectedTask.ProjectID = project.ProjectID;
+  this.sharedService.selectedTask.ProjectName = project.ProjectName;
+  this.modalReference.close();
+}
+
+selectUser(user: User): void {
+  console.log('select User call' + user);
+  this.sharedService.selectedTask.UserID = user.UserID;
+  // this.sharedService.selectedTask.
+  this.sharedService.selectedTask.UserName = user.FirstName + ' ' + user.LastName;
+  this.modalReference.close();
+}
 
   resetForm(form?: NgForm) {
     if (form != null) {
-      localStorage.removeItem('editTaskID');
       form.reset();
       this.btnSubmitText = 'Add Task';
     }
-
 
       this.sharedService.selectedTask = {
         TaskID: null,
@@ -72,6 +75,7 @@ export class TaskComponent implements OnInit {
         ParentTaskDesc: '',
         ProjectName: '',
         UserID: null,
+        UserName: '',
     };
   }
 
@@ -114,9 +118,7 @@ export class TaskComponent implements OnInit {
                           this.sharedService.AddTask(this.sharedService.selectedTask)
                         .subscribe(data => {
                           this.resetForm(form);
-                          alert('record saved');
-                          // this.sharedService.getProject();
-                          // this.toastr.success('New Record Added Succcessfully', 'Employee Register');
+                          alert('Record saved Successfully');
                         },
                         error => {
                           console.log('Error on service AddTask:');
@@ -136,7 +138,6 @@ export class TaskComponent implements OnInit {
                 .subscribe(data => {
                   this.resetForm(form);
                   localStorage.removeItem('editTaskID');
-                // this.toastr.info('Record Updated Successfully!', 'Employee Register');
                 },
                 error => {
                   console.log('Error on service updateTask:');

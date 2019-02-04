@@ -10,5 +10,6 @@ export class Task {
   ParentTaskDesc: string;
   ProjectName: string;
   UserID: number;
+  UserName: string;
 }
 

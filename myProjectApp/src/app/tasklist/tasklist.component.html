@@ -1,9 +1,22 @@
-<div class="row">
+<div class="col-md-12">
   <h4> Task Details </h4>
+  <div class="row padding">
+          <div class="col-md-2">
+              <label class="form-text ">Project </label>
+          </div>
+          <div class="form-group col-md-6">
+            <input class="form-control" name="ProjectName" #ProjectName="ngModel" [(ngModel)]="selectedProjectName"   placeholder="Select Project">
+            <input type="hidden" name="ProjectID" #ProjectID="ngModel" [(ngModel)]="selectedProjectID">
+          </div>
+          <div class="col-md-2"><button type="button" class="btn btn-outline-primary" (click)="open(contentProject)">Project Search</button></div>
+  </div>
+  <div *ngIf="sharedService.taskList && sharedService.taskList.length >0">
+      <input type="text" class="form-control" style="margin-bottom:10px; margin-top:10px ; width:250px;" [(ngModel)]="serachText" placeholder="Search Task">
+  </div>
   <div class="table-responsive table-container">
-    <table class="table padding" *ngFor="let task of sharedService.taskList">
-      <thead>
-        <tr>
+    <table class="table padding" *ngFor="let task of sharedService.filteredTasks">
+       <thead>
+         <tr>
           <th>Task</th>
           <th>Parent Task</th>
           <th>Priority</th>
@@ -22,12 +35,51 @@
           <td >{{task.EndDate}}</td>
           <td >{{task.Status}}</td>
           <td >
-            <button (click)="EndTask(task)" *ngIf="task.Status !='Completed'" class="btn  btn-info actionbtn ">End Task</button>
-            <button (click)="editTask(task)" style="margin-left: 20px;" class="btn  btn-info  actionbtn ">Edit</button>
+            <button (click)="EndTask(task)" *ngIf="task.Status !='Completed'" style="margin-left: 20px;" class="btn  btn-info actionbtn ">End Task</button>
+            <button (click)="editTask(task)" *ngIf="task.Status !='Completed'" style="margin-left: 20px;" class="btn  btn-info  actionbtn ">Edit</button>
           </td>
         </tr>
       </tbody>
     </table>
-    
+    <p *ngIf="(!sharedService.taskList || sharedService.taskList.length ===0) && selectedProjectID">No data to dispaly</p>
+
   </div>
 </div>
+
+
+<ng-template #contentProject let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Select Project</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+          <div class="table-responsive table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Project Name</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let project of sharedService.filteredProjects">
+                  <td>{{project.ProjectName}}</td>
+                  <td>{{project.StartDate}}</td>
+                  <td>{{project.EndDate}}</td>
+                  <td>
+                    <div class="row" > <button type="button" (click)="selectProject(project)"  class="btn btn-info actionbtn">Select</button></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Close</button>
+  </div>
+</ng-template>

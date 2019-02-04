@@ -2,22 +2,18 @@
 <form class="form-style" #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
   <div id="pageContainer" class="container">
     <input type="hidden" name="TaskID" #TaskID="ngModel" [(ngModel)]="sharedService.selectedTask.TaskID">
-    <div class="row">
-        <div class="col-md-2">
-            <label class="form-text ">Project </label>
-        </div>
-        <div class="form-group col-md-8">
-          <select required name="ProjectID" #ProjectID="ngModel" class="form-control" [(ngModel)]="sharedService.selectedTask.ProjectID">
-          <option value="undefined">Please select Project</option>
-          <option *ngFor="let project of sharedService.projectList"
-                  [ngValue]="project.ProjectID">
-              {{project.ProjectName}}
-          </option>
-          </select>
-          <div class="validation-error" *ngIf="ProjectID.invalid && ProjectID.touched">Project is Required.</div>
-        </div>
+  <div class="row">
+    <div class="col-md-2">
+        <label class="form-text ">Project </label>
     </div>
-    <div class="row">
+    <div class="form-group col-md-6">
+      <input class="form-control" name="ProjectName" #ProjectName="ngModel" [(ngModel)]="sharedService.selectedTask.ProjectName"   placeholder="Select Project" required>
+      <input type="hidden" name="ProjectID" #ProjectID="ngModel" [(ngModel)]="sharedService.selectedTask.ProjectID">
+      <div class="validation-error" *ngIf="ProjectID.invalid && ProjectName.touched">Project is Required.</div>
+    </div>
+    <div class="col-md-2"><button type="button" class="btn btn-outline-primary" (click)="open(contentProject)">Search</button></div>
+  </div>
+  <div class="row">
       <div class="col-md-2">
           <label class="form-text ">Task </label>
       </div>
@@ -64,7 +60,7 @@
         <label class="form-text">Start Date</label>
        </div>
       <div class="form-group col-md-4">
-        <input class="form-control" name="StartDate" #StartDate="ngModel" [(ngModel)]="sharedService.selectedTask.StartDate" placeholder="Start Date">
+        <input type="date" class="form-control" name="StartDate" #StartDate="ngModel" [(ngModel)]="sharedService.selectedTask.StartDate" placeholder="Start Date">
       </div>
       <div class="col-md-2">
           <label class="form-text">End Date</label>
@@ -77,35 +73,101 @@
       <div class="col-md-2">
           <label class="form-text ">User </label>
       </div>
-      <div class="form-group col-md-8">
-          <select required name="UserID" #UserID="ngModel" class="form-control" [(ngModel)]="sharedService.selectedTask.UserID">
-          <option value="undefined">Please select User</option>
-          <option *ngFor="let user of sharedService.userList"
-                  [ngValue]="user.UserID">
-              {{user.FirstName}}  {{user.LastName}}
-          </option>
-          </select>
-          <div class="validation-error" *ngIf="UserID.invalid && UserID.touched">User is Required.</div>
+      <div class="form-group col-md-6">
+        <input class="form-control" name="UserName" #UserName="ngModel" [(ngModel)]="sharedService.selectedTask.UserName"   placeholder="Select User" >
+        <input type="hidden" name="UserID" #UserID="ngModel" [(ngModel)]="sharedService.selectedTask.UserID">
+        <div class="validation-error" *ngIf="UserID.invalid && UserName.touched">User is Required.</div>
       </div>
-  </div>
+      <div class="col-md-2"><button type="button" class="btn btn-outline-primary" (click)="open(contentUser)">Search</button></div>
+    </div>
 </div>
     <div class="row">
       <div class="form-group col-md-2">
-        <button type="submit" name="btnSubmit" class="btn btn-block btn-lg btn-info">
+        <button type="submit" name="btnSubmit" [disabled]="!taskForm.valid" class="btn btn-block btn-lg btn-info">
           <i class="fa fa-floppy-o"></i>{{this.btnSubmitText}}</button>
       </div>
       <div class="form-group col-md-2">
-        <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(taskForm)">
+        <button type="button" class="btn btn-block btn-lg btn-secondary" (click)="resetForm(taskForm)">
           <i class="fa fa-repeat"></i> Reset</button>
       </div>
     </div>
+
   </div>
   </form>
 
+<ng-template #contentProject let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Select Project</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+          <div class="table-responsive table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Project Name</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let project of sharedService.filteredProjects">
+                  <td>{{project.ProjectName}}</td>
+                  <td>{{project.StartDate}}</td>
+                  <td>{{project.EndDate}}</td>
+                  <td>
+                    <div class="row" > <button type="button" (click)="selectProject(project)"  class="btn btn-info actionbtn">Select</button></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Close</button>
+  </div>
+</ng-template>
 
-  <script>
-    $(window).unload(function(){
-      localStorage.removeItem('editTaskID');
-    });
+<ng-template #contentUser let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Select User</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+          <div class="table-responsive table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>  </th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Employee ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of sharedService.userList">
+                  <td>
+                    <div class="row" > <button type="button" (click)="selectUser(user)"  class="btn btn-info actionbtn">Select</button></div>
+                  </td>
+                  <td>{{user.FirstName}}</td>
+                  <td>{{user.LastName}}</td>
+                  <td>{{user.EmployeeID}}</td>
 
-  </script>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Close</button>
+  </div>
+</ng-template>
+

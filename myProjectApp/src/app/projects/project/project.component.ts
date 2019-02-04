@@ -11,10 +11,10 @@ import { Project } from 'src/app/Models/project.model';
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent implements OnInit {
+  // dtStartDate: any;
+  constructor(private sharedService: SharedService) {
 
-  // currentPriority: any;
-
-  constructor(private sharedService: SharedService) { }
+  }
 
   ngOnInit() {
     this.resetForm();
@@ -30,11 +30,12 @@ export class ProjectComponent implements OnInit {
       this.sharedService.selectedProject = {
       ProjectID: null,
       ProjectName: '',
-      StartDate: '',
-      EndDate: '',
+      StartDate: null,
+      EndDate: null,
       Priority: '',
       TotalTasks: null,
       CompletedTasks: null,
+      Suspended: false,
     };
   }
 
@@ -48,13 +49,13 @@ export class ProjectComponent implements OnInit {
     this.sharedService.selectedProject.ProjectName = form.value.ProjectName;
     this.sharedService.selectedProject.StartDate = form.value.StartDate;
     this.sharedService.selectedProject.EndDate = form.value.EndDate;
-    console.log('savepriority value=' + this.sharedService.selectedProject.Priority);
 
     if (form.value.ProjectID == null) {
           this.sharedService.AddProject(this.sharedService.selectedProject)
         .subscribe(data => {
           this.resetForm(form);
           this.sharedService.getProject();
+          alert('record saved successfully');
           // this.toastr.success('New Record Added Succcessfully', 'Employee Register');
         },
         error => {
@@ -79,6 +80,45 @@ export class ProjectComponent implements OnInit {
     }
   }
 }
+
+
+/*
+  parseDate(date: string) {
+        if (date) {
+              return new Date(date);
+        } else {
+          return null;
+        }
+
+  }
+set parseDate(e) {
+  e = e.split('-');
+  const d = new Date(Date.UTC(e[0], e[1] - 1, e[2]));
+  console.log('d' + d);
+  this.fmStartDate.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+}
+
+get parseDate () {
+  console.log('this.fmStartDate' + this.fmStartDate);
+  return this.fmStartDate.toISOString().substring(0, 10);
+}*/
+/*
+get parseStartDate(): any {
+
+ this.dtStartDate = new Date(this.sharedService.selectedProject.StartDate);
+  this.fmStartDate = {year: this.dtStartDate.getFullYear,
+    month: this.dtStartDate.getMonth,
+    day: this.dtStartDate.getDay
+   };
+   console.log('sthis.fmStartDate=', this.fmStartDate);
+  return this.fmStartDate;
+}
+set parseStartDate(value: any) {
+  console.log('set date value=', value);
+  this.sharedService.selectedProject.StartDate = value;
+}
+*/
+
 /*
   projectformlabel: string = 'Add Project';
   empformbtn: string = 'Save';

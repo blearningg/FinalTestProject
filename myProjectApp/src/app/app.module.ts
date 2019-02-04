@@ -15,13 +15,14 @@ import { UserComponent } from './users/user/user.component';
 import { UserlistComponent } from './users/userlist/userlist.component';
 import { TaskComponent } from './task/task.component';
 import { TasklistComponent } from './tasklist/tasklist.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from './modal/modal.component';
-import { SearchProjectComponent } from './projects/search-project/search-project.component';
-import { SearchUserComponent } from './users/search-user/search-user.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { ModalComponent } from './modal/modal.component';
+// import { SearchProjectComponent } from './projects/search-project/search-project.component';
+// import { SearchUserComponent } from './users/search-user/search-user.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
+import { Pipe } from '@angular/core/src/metadata/directives';
+// import { OrderByPipe } from 'src/app/orderBy.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,9 +35,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     UserlistComponent,
     TaskComponent,
     TasklistComponent,
-    ModalComponent,
-    SearchProjectComponent,
-    SearchUserComponent
+   // ModalComponent,
+   // SearchProjectComponent,
+   // SearchUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,15 +45,16 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
-  ],
+   NgbModule.forRoot(),
+   DateValueAccessorModule,
+     ],
   providers: [
     NgbActiveModal,
     ],
   bootstrap: [AppComponent],
   entryComponents: [
-    SearchProjectComponent,
-    SearchUserComponent
+   // SearchProjectComponent,
+   // SearchUserComponent
   ]
 
 })
