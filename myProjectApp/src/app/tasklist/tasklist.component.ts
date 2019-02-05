@@ -15,6 +15,8 @@ export class TasklistComponent implements OnInit {
   selectedProjectName: any;
   modalReference: NgbModalRef;
   selectedProjectID: any = null;
+  reverseSort: boolean = false;
+  sortColumn: string = 'StartDate';
   private _searchText: string;
 
   get serachText(): string {
@@ -25,6 +27,7 @@ export class TasklistComponent implements OnInit {
     this.sharedService.filteredTasks = this.filterTaskts(value);
   }
   constructor(private sharedService: SharedService, private router: Router, private modalService: NgbModal) { }
+
 
   ngOnInit() {
     this.sharedService.taskList = null;
@@ -64,12 +67,35 @@ export class TasklistComponent implements OnInit {
     );
   }
   editTask(task: Task): void {
-   // this.sharedService.selectedTask = Object.assign({}, task);
-   // localStorage.removeItem('editTaskID');
-  //  localStorage.setItem('editTaskID', task.TaskID.toString());
-   // this.router.navigate(['add-project']);
-   // console.log('selectedtask=' + task);
     this.router.navigate(['/task']);
     this.sharedService.selectedTask = Object.assign({}, task);
+  }
+
+  sortData(sortColumnName: string) {
+
+    this.reverseSort =  (this.sortColumn = sortColumnName) ? !this.reverseSort : false;
+    this.sortColumn = sortColumnName;
+
+    if (sortColumnName = 'StartDate') {
+      if (this.reverseSort) {
+        this.sharedService.filteredTasks.sort((a, b) => b.StartDate.localeCompare(a.StartDate));
+      } else {
+        this.sharedService.filteredTasks.sort((a, b) => a.StartDate.localeCompare(b.StartDate));
+      }
+    } else if (sortColumnName = 'EndDate') {
+      if (this.reverseSort) {
+        this.sharedService.filteredTasks.sort((a, b) => b.EndDate.localeCompare(a.EndDate));
+      } else {
+        this.sharedService.filteredTasks.sort((a, b) => a.EndDate.localeCompare(b.EndDate));
+      }
+
+    } else if (sortColumnName = 'Priority') {
+      if (this.reverseSort) {
+        this.sharedService.filteredTasks.sort((a, b) => b.Priority.toString().localeCompare(a.Priority.toString()));
+      } else {
+        this.sharedService.filteredTasks.sort((a, b) => a.Priority.toString().localeCompare(b.Priority.toString()));
+      }
+    }
+
   }
 }

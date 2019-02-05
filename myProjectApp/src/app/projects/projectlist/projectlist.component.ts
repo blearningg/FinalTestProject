@@ -32,12 +32,6 @@ export class ProjectlistComponent implements OnInit {
   // constructor(private sharedService: SharedService, private router: Router, ) { }
   constructor(private sharedService: SharedService) { }
 
-  sortData(sortColumnName: string) {
-
-    this.reverseSort =  (this.sortColumn = sortColumnName) ? !this.reverseSort : false;
-    this.sortColumn = sortColumnName;
-  }
-
   filterProjects(searchText: string) {
     return this.sharedService.projectList.filter(x => x.ProjectName.toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
   }
@@ -69,6 +63,33 @@ export class ProjectlistComponent implements OnInit {
         */
       //  this.sharedService.selectedProject.StartDate = new Date(this.sharedService.selectedProject.StartDate.getFullYear +
       //    '/' + this.sharedService.selectedProject.StartDate.getMonth + '/' + this.sharedService.selectedProject.StartDate.getDay);
+  }
+
+  sortData(sortColumnName: string) {
+
+    this.reverseSort =  (this.sortColumn = sortColumnName) ? !this.reverseSort : false;
+    this.sortColumn = sortColumnName;
+    if (sortColumnName = 'StartDate') {
+      if (this.reverseSort) {
+        this.sharedService.filteredProjects.sort((a, b) => b.StartDate.localeCompare(a.StartDate));
+      } else {
+        this.sharedService.filteredProjects.sort((a, b) => a.StartDate.localeCompare(b.StartDate));
+      }
+    } else if (sortColumnName = 'EndDate') {
+      if (this.reverseSort) {
+        this.sharedService.filteredProjects.sort((a, b) => b.EndDate.localeCompare(a.EndDate));
+      } else {
+        this.sharedService.filteredProjects.sort((a, b) => a.EndDate.localeCompare(b.EndDate));
+      }
+
+    } else if (sortColumnName = 'Priority') {
+      if (this.reverseSort) {
+        this.sharedService.filteredProjects.sort((a, b) => b.Priority.localeCompare(a.Priority));
+      } else {
+        this.sharedService.filteredProjects.sort((a, b) => a.Priority.localeCompare(b.Priority));
+      }
+    }
+
   }
 }
 

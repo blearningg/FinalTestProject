@@ -2,7 +2,7 @@ export class User {
   UserID: number;
   FirstName: string;
   LastName: string;
-  EmployeeID: number;
+  EmployeeID: string;
   ProjectID: number;
   TaskID: number;
 }

@@ -11,7 +11,16 @@
           <div class="col-md-2"><button type="button" class="btn btn-outline-primary" (click)="open(contentProject)">Project Search</button></div>
   </div>
   <div *ngIf="sharedService.taskList && sharedService.taskList.length >0">
-      <input type="text" class="form-control" style="margin-bottom:10px; margin-top:10px ; width:250px;" [(ngModel)]="serachText" placeholder="Search Task">
+      <div class="row " style="margin-bottom:5px;">
+          <div class="col-md-4">
+            <input type="text" class="form-control"  [(ngModel)]="serachText" placeholder="Search Task">
+          </div>
+          <div class="col-md-2 text-right">Sort By:</div>
+          <div class="col-md-1"><button (click)="sortData('StartDate')" class="btn btn-sm btn-secondary">Start Date</button>
+          </div>
+          <div class="col-md-1"><button (click)="sortData('EndDate')" class="btn btn-sm btn-secondary">End Date</button></div>
+          <div class="col-md-1"><button (click)="sortData('Priority')" class="btn btn-sm btn-secondary">Priority</button></div>
+        </div>
   </div>
   <div class="table-responsive table-container">
     <table class="table padding" *ngFor="let task of sharedService.filteredTasks">

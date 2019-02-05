@@ -68,8 +68,10 @@ export class ProjectComponent implements OnInit {
 
       this.sharedService.updateProject(this.sharedService.selectedProject)
       .subscribe(data => {
+        console.log('update');
         this.resetForm(form);
         this.sharedService.getProject();
+        alert('record saved successfully');
        // this.toastr.info('Record Updated Successfully!', 'Employee Register');
       },
       error => {

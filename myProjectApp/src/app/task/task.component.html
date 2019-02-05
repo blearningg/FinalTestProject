@@ -153,13 +153,13 @@
               </thead>
               <tbody>
                 <tr *ngFor="let user of sharedService.userList">
-                  <td>
-                    <div class="row" > <button type="button" (click)="selectUser(user)"  class="btn btn-info actionbtn">Select</button></div>
-                  </td>
+
                   <td>{{user.FirstName}}</td>
                   <td>{{user.LastName}}</td>
                   <td>{{user.EmployeeID}}</td>
-
+                  <td>
+                      <div class="row" > <button type="button" (click)="selectUser(user)"  class="btn btn-info actionbtn">Select</button></div>
+                   </td>
                 </tr>
               </tbody>
             </table>

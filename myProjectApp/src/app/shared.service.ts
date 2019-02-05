@@ -14,16 +14,18 @@ import { Parenttask } from 'src/app/Models/parenttask.model';
   providedIn: 'root'
 })
 export class SharedService {
-
-   // SERVICE_URL = 'http://localhost:50243/api/';
-  SERVICE_URL = 'http://localhost:8787/api/';
+   SERVICE_URL = 'http://localhost:9000/api/';
+  // SERVICE_URL = 'http://localhost:50243/api/';
+  // SERVICE_URL = 'http://localhost:8787/api/';
 
  // fmStartDateModal: any;
  selectedProject: Project;
  projectList: Project[] = [];
  filteredProjects: Project[] ;
+
  selectedUser: User;
  userList: User[] = [];
+ filteredUsers: User[];
 
  selectedTask: Task;
  filteredTasks: Task[];
@@ -47,7 +49,7 @@ export class SharedService {
   }
 
   suspendProject(project: Project) {
-    console.log('update service call');
+    // console.log('update service call');
     project.Suspended = true;
     return this.httpClient.put(this.SERVICE_URL + '/Projects/' + project.ProjectID, project);
   }
@@ -62,8 +64,9 @@ export class SharedService {
 /*User service function */
   getUsers() {
     return this.httpClient.get(this.SERVICE_URL + '/Users').subscribe((data: any[]) => {
-      console.log(data);
+      // console.log(data);
       this.userList = data;
+      this.filteredUsers = data;
     },
     error => {
       console.log('Error on service getUsers call:');
@@ -73,6 +76,7 @@ export class SharedService {
   }
 
   deleteUser(id: number) {
+    console.log('id=' + id );
    return this.httpClient.delete<User[]>(this.SERVICE_URL + '/Users/' + id);
   }
 

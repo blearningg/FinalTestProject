@@ -1,12 +1,14 @@
 <div class="col-md-12">
 <h4>Project Details</h4>
-<input type="text" class="form-control" style="margin-bottom:10px; margin-top:10px ; width:250px;" [(ngModel)]="serachText" placeholder="Project Search">
-<div class="row">
-  <div class="col-md-2">Sort By:</div>
-  <div class="col-md-2"><button (click)="SortData(StartDate)" class="btn btn-info">Start Date</button></div>
-  <div class="col-md-2"><button (click)="SortData(EndDate)" class="btn btn-info">End Date</button></div>
-  <div class="col-md-2"><button (click)="SortData(Priority)" class="btn btn-info">Priority</button></div>
-  <div class="col-md-2"><button (click)="SortData(Status)" class="btn btn-info">Completed</button></div>
+<div class="row" style="margin-bottom:10px; margin-top:10px; width:80%;">
+    <input type="text" class="form-control"  [(ngModel)]="serachText" placeholder="Project Search">
+</div>
+<div class="row " style="margin-bottom:10px;">
+  <div class="col-md-2 text-right">Sort By:</div>
+  <div class="col-md-2"><button (click)="sortData('StartDate')" class="btn btn-sm btn-secondary">Start Date</button></div>
+  <div class="col-md-2"><button (click)="sortData('EndDate')" class="btn btn-sm btn-secondary">End Date</button></div>
+  <div class="col-md-2"><button (click)="sortData('Priority')" class="btn btn-sm btn-secondary">Priority</button></div>
+  <div class="col-md-4"></div>
 </div>
 
 <table class="table table-responsive table-container" style="margin-right:5px;" >

@@ -1,5 +1,15 @@
 <div class="col-md-12">
     <h4>User Details</h4>
+    <div class="row " style="margin-bottom:10px;margin-top:10px">
+        <div class="col-md-4">
+          <input type="text" class="form-control" [(ngModel)]="serachText" placeholder="Search User">
+        </div>
+        <div class="col-md-2 text-right">Sort By:</div>
+        <div class="col-md-2"><button (click)="sortData('FirstName')" class="btn btn-sm btn-secondary">First Name</button>
+        </div>
+        <div class="col-md-2"><button (click)="sortData('LastName')" class="btn btn-sm btn-secondary">Last Name</button></div>
+        <div class="col-md-2"><button (click)="sortData('EmployeeID')" class="btn btn-sm btn-secondary">Employee ID</button></div>
+      </div>
     <div class="table-responsive table-container">
       <table class="table">
         <thead>
@@ -10,12 +20,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of sharedService.userList">
+          <tr *ngFor="let user of sharedService.filteredUsers">
             <td>{{user.FirstName}}</td>
             <td>{{user.LastName}}</td>
             <td>{{user.EmployeeID}}</td>
             <td>
-              <button (click)="deleteUser(user.userID)" class="btn btn-info"> Delete</button>
+              <button (click)="deleteUser(user.UserID)" class="btn btn-info"> Delete</button>
               <button (click)="editUser(user)" style="margin-left: 20px;" class="btn btn-info"> Edit</button>
             </td>
           </tr>
