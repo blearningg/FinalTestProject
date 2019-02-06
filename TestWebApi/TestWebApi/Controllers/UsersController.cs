@@ -19,7 +19,7 @@ namespace TestWebApi.Controllers
         // GET: api/Users
         public IQueryable<User> GetUsers()
         {
-            return db.Users;
+            return db.Users.OrderBy(x => x.FirstName);
         }
 
         // GET: api/Users/5
@@ -39,6 +39,15 @@ namespace TestWebApi.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != user.UserID)
+            {
+                return BadRequest();
+            }
 
             db.Entry(user).State = EntityState.Modified;
 

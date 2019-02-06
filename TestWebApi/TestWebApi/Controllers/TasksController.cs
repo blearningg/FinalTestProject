@@ -35,12 +35,12 @@ namespace TestWebApi.Controllers
                     obj.Status = task.Status;
                     obj.ParentTaskDesc = db.ParentTasks.Where(x => x.ParentID == task.ParentID).Select(x => x.TaskDesc).FirstOrDefault();
                     obj.ProjectName = db.Projects.Where(x => x.ProjectID == task.ProjectID).Select(x => x.ProjectName).FirstOrDefault();
-
+                    obj.UserName = db.Users.Where(x => x.TaskID == task.TaskID).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
                     lstTask.Add(obj);
                 }
                
             }
-            return lstTask.ToList(); //db.Tasks;//db.Tasks.Include(i => i.ParentTask).ToList();
+            return lstTask.ToList().OrderBy(x=>x.StartDate); //db.Tasks;//db.Tasks.Include(i => i.ParentTask).ToList();
         }
 
         // GET: api/Tasks/5

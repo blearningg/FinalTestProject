@@ -20,5 +20,6 @@ namespace TestWebApi.Models
             public  string ParentTaskDesc { get; set; }
            public  string ProjectName { get; set; }
             public Nullable<int> UserID { get; set; }
+           public string UserName { get; set; }
     }
 }

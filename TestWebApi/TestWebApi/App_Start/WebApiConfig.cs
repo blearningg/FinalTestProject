@@ -12,13 +12,15 @@ namespace TestWebApi
         public static void Register(HttpConfiguration config)
         {
             //config.EnableCors(new EnableCorsAttribute("http://localhost:4200", headers: "*", methods: "*"));
-            // Web API configuration and services
-            var enableCorsAttribute = new EnableCorsAttribute("*",
-                                           "Origin, Content-Type, Accept",
-                                           "GET, PUT, POST, DELETE, OPTIONS"
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+            //// Web API configuration and services
+            //var enableCorsAttribute = new EnableCorsAttribute("*",
+            //                               "Origin, Content-Type, Accept",
+            //                               "GET, PUT, POST, DELETE, OPTIONS"
 
-                                           );
-            config.EnableCors(enableCorsAttribute);
+            //                               );
+            //config.EnableCors(enableCorsAttribute);
 
             // Web API routes
             config.MapHttpAttributeRoutes();

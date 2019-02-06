@@ -16,6 +16,12 @@ namespace TestWebApi.Controllers
     {
         private masterEntities db = new masterEntities();
 
+        // GET: api/ParentTasks
+        public IQueryable<ParentTask> GetParentTasks()
+        {
+            return db.ParentTasks;
+        }
+
         // GET: api/ParentTasks/5
         [ResponseType(typeof(ParentTask))]
         public IHttpActionResult GetParentTask(int id)

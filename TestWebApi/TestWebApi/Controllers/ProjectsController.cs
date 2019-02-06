@@ -29,8 +29,8 @@ namespace TestWebApi.Controllers
                 ProjectViewModel obj = new ProjectViewModel();
                 obj.ProjectID = proj.ProjectID;
                 obj.ProjectName = proj.ProjectName;
-                obj.StartDate = proj.StartDate.ToString("MM/dd/yyyy");
-                obj.EndDate = proj.EndDate.ToString("MM/dd/yyyy");
+                obj.StartDate = proj.StartDate.ToString(); //.ToString("MM/dd/yyyy");
+                obj.EndDate = proj.EndDate.ToString();//.ToString("MM/dd/yyyy");
                 obj.Priority = proj.Priority;
                 obj.Suspended = proj.Suspended;
                 obj.TotalTasks = db.Tasks.Where(x => x.ProjectID == proj.ProjectID).Count() ;
@@ -39,7 +39,7 @@ namespace TestWebApi.Controllers
                 lstProject.Add(obj);
             }
             
-            return lstProject.ToList();
+            return lstProject.ToList().OrderBy(x => x.StartDate);
         }
 
         //// GET: api/Projects/5
