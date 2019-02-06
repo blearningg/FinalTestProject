@@ -6,3 +6,4 @@
 -mergebyhash ^
 -skipautoprops ^
 -output:"%~dp0\TestCoverageReport.xml"
+
