@@ -27,10 +27,10 @@ namespace TestWebApi.Controllers
         public IHttpActionResult GetUser(int id)
         {
             User user = db.Users.Find(id);
-            //if (user == null)
-            //{
-            //    return NotFound();
-            //}
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             return Ok(user);
         }
@@ -39,11 +39,6 @@ namespace TestWebApi.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             if (id != user.UserID)
             {
                 return BadRequest();

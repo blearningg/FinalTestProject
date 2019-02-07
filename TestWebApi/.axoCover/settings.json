@@ -8,7 +8,7 @@
   "ExcludeAttributes": "System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute",
   "ExcludeFiles": "",
   "ExcludeDirectories": "",
-  "Filters": "+[TestWebApi*]* -[NunitApiTest]* -[*]TestWebApi.RouteConfig   -[*]TestWebApi.Areas* -[*]TestWebApi.BundleConfig -[*]TestWebApi.FilterConfig -[*]TestWebApi.WebApiConfig -[*]TestWebApi.WebApiApplication",
+  "Filters": "+[TestWebApi*]* -[NunitApiTest]* -[*]TestWebApi.RouteConfig   -[*]TestWebApi.Areas* -[*]TestWebApi.BundleConfig -[*]TestWebApi.FilterConfig -[*]TestWebApi.WebApiConfig -[*]TestWebApi.WebApiApplication\r\n-[*]TestWebApi.Controllers.HomeController",
   "IsIncludingSolutionAssemblies": false,
   "IsExcludingTestAssemblies": false,
   "IsCoveringByTest": true,

@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private sharedService: SharedService) { }
+  constructor(public sharedService: SharedService) { }
 
   ngOnInit() {
     this.resetForm();

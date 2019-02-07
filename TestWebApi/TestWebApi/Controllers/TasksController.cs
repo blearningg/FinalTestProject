@@ -29,8 +29,8 @@ namespace TestWebApi.Controllers
                     obj.ParentID = task.ParentID;
                     obj.ProjectID = task.ProjectID;
                     obj.TaskDesc = task.TaskDesc;
-                    obj.StartDate = task.StartDate.ToString("MM/dd/yyyy");
-                    obj.EndDate = task.EndDate.ToString("MM/dd/yyyy");
+                    obj.StartDate = task.StartDate.ToString("yyyy-MM-dd");
+                    obj.EndDate = task.EndDate.ToString("yyyy-MM-dd");
                     obj.Priority = task.Priority;
                     obj.Status = task.Status;
                     obj.ParentTaskDesc = db.ParentTasks.Where(x => x.ParentID == task.ParentID).Select(x => x.TaskDesc).FirstOrDefault();
@@ -44,24 +44,53 @@ namespace TestWebApi.Controllers
         }
 
         // GET: api/Tasks/5
-        [ResponseType(typeof(Task))]
+        [ResponseType(typeof(TaskViewModel))]
         public IHttpActionResult GetTask(int id)
         {
             Task task = db.Tasks.Find(id);
 
-            return Ok(task);
+            TaskViewModel obj = new TaskViewModel();
+            obj.TaskID = task.TaskID;
+            obj.ParentID = task.ParentID;
+            obj.ProjectID = task.ProjectID;
+            obj.TaskDesc = task.TaskDesc;
+            obj.StartDate = task.StartDate.ToString("yyyy-MM-dd");
+            obj.EndDate = task.EndDate.ToString("yyyy-MM-dd");
+            obj.Priority = task.Priority;
+            obj.Status = task.Status;
+            obj.ParentTaskDesc = db.ParentTasks.Where(x => x.ParentID == task.ParentID).Select(x => x.TaskDesc).FirstOrDefault();
+            obj.ProjectName = db.Projects.Where(x => x.ProjectID == task.ProjectID).Select(x => x.ProjectName).FirstOrDefault();
+            obj.UserName = db.Users.Where(x => x.TaskID == task.TaskID).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+
+
+            return Ok(obj);
         }
 
         //// PUT: api/Tasks/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTask(int id, Task task)
+        public IHttpActionResult PutTask(int id, TaskViewModel taskViewModel)
         {
 
-            if (id != task.TaskID)
-            {
-                return BadRequest();
-            }
+            Task task = db.Tasks.Find(id);
+            task.TaskID = taskViewModel.TaskID;
+            task.ParentID = taskViewModel.ParentID;
+            task.ProjectID = taskViewModel.ProjectID;
+            task.TaskDesc = taskViewModel.TaskDesc;
+            task.StartDate = Convert.ToDateTime(taskViewModel.StartDate);
+            task.EndDate = Convert.ToDateTime(taskViewModel.EndDate);
+            task.Priority = taskViewModel.Priority;
+            task.Status = taskViewModel.Status;
             db.Entry(task).State = EntityState.Modified;
+
+           // db.SaveChanges();
+
+            User objUser = db.Users.Find(taskViewModel.UserID);
+            objUser.TaskID = task.TaskID;
+
+            db.Entry(objUser).State = EntityState.Modified;
+
+           // db.SaveChanges();
+
 
             try
             {
@@ -95,14 +124,12 @@ namespace TestWebApi.Controllers
                 {
                     User objUser = db.Users.Find(taskViewModel.UserID);
 
-                    objUser.ProjectID = taskViewModel.ProjectID;
-                    objUser.TaskID = task.TaskID;
 
                     db.Entry(objUser).State = EntityState.Modified;
 
                     db.SaveChanges();
                 }
-                return CreatedAtRoute("DefaultApi", new { id = task.TaskID }, task);
+                return CreatedAtRoute("DefaultApi", new { id = task.TaskID }, taskViewModel);
            
         }
 

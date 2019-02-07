@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared.service';
 import { NgForm } from '@angular/forms';
 import { Project } from 'src/app/Models/project.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { User } from 'src/app/Models/user.model';
 
 @Component({
   selector: 'app-project',
@@ -12,11 +15,13 @@ import { Project } from 'src/app/Models/project.model';
 })
 export class ProjectComponent implements OnInit {
   // dtStartDate: any;
-  constructor(private sharedService: SharedService) {
+  modalReference: NgbModalRef;
+  constructor(public sharedService: SharedService, private modalService: NgbModal) {
 
   }
 
   ngOnInit() {
+    this.sharedService.getUsers();
     this.resetForm();
   }
 
@@ -36,7 +41,24 @@ export class ProjectComponent implements OnInit {
       TotalTasks: null,
       CompletedTasks: null,
       Suspended: false,
+      UserID: null,
+      UserName: '',
     };
+  }
+
+  open(content) {
+    this.modalReference = this.modalService.open(content);
+    this.modalReference.result.then((result) => {
+     // this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  selectUser(user: User): void {
+    this.sharedService.selectedProject.UserID = user.UserID;
+    this.sharedService.selectedProject.UserName = user.FirstName + ' ' + user.LastName;
+    this.modalReference.close();
   }
 
   priorityValueChanged(e) {
@@ -68,7 +90,6 @@ export class ProjectComponent implements OnInit {
 
       this.sharedService.updateProject(this.sharedService.selectedProject)
       .subscribe(data => {
-        console.log('update');
         this.resetForm(form);
         this.sharedService.getProject();
         alert('record saved successfully');

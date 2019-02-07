@@ -26,7 +26,7 @@ export class TasklistComponent implements OnInit {
     this._searchText = value;
     this.sharedService.filteredTasks = this.filterTaskts(value);
   }
-  constructor(private sharedService: SharedService, private router: Router, private modalService: NgbModal) { }
+  constructor(public sharedService: SharedService, private router: Router, private modalService: NgbModal) { }
 
 
   ngOnInit() {

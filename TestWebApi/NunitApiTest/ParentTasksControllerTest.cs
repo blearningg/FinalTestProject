@@ -40,5 +40,14 @@ namespace NunitApiTest
             controller.Dispose();
         }
 
+        [Test]
+        public void GetParentTasks_NunitTest()
+        {
+            var controller = new ParentTasksController();
+            var result = controller.GetParentTasks();
+            Assert.IsNotNull(result);
+            controller.Dispose();
+        }
+
     }
 }

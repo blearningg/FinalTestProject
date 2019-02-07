@@ -30,7 +30,7 @@ export class ProjectlistComponent implements OnInit {
 
   // projects: any[] = [];
   // constructor(private sharedService: SharedService, private router: Router, ) { }
-  constructor(private sharedService: SharedService) { }
+  constructor(public sharedService: SharedService) { }
 
   filterProjects(searchText: string) {
     return this.sharedService.projectList.filter(x => x.ProjectName.toLowerCase().indexOf(searchText.toLowerCase()) !== -1);

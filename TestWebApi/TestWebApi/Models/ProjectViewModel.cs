@@ -17,5 +17,7 @@ namespace TestWebApi.Models
         public Nullable<int> CompletedTasks { get; set; }
 
         public Nullable<bool> Suspended { get; set; }
+        public Nullable<int> UserID { get; set; }
+        public string UserName { get; set; }
     }
 }

@@ -20,10 +20,10 @@ namespace TestWebApi
         {
         }
     
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    throw new UnintentionalCodeFirstException();
+        //}
     
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ParentTask> ParentTasks { get; set; }

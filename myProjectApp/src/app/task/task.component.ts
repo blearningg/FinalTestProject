@@ -20,7 +20,7 @@ export class TaskComponent implements OnInit {
   modalReference: NgbModalRef;
   isParentTask: boolean = false;
   btnSubmitText: string = 'Add Task';
-  constructor(private sharedService: SharedService, private modalService: NgbModal) { }
+  constructor(public sharedService: SharedService, private modalService: NgbModal) { }
 
   ngOnInit() {
     if (isObject(this.sharedService.selectedTask)) {
@@ -43,14 +43,12 @@ open(content) {
 }
 
 selectProject(project: Project): void {
-  console.log('select call' + project);
   this.sharedService.selectedTask.ProjectID = project.ProjectID;
   this.sharedService.selectedTask.ProjectName = project.ProjectName;
   this.modalReference.close();
 }
 
 selectUser(user: User): void {
-  console.log('select User call' + user);
   this.sharedService.selectedTask.UserID = user.UserID;
   // this.sharedService.selectedTask.
   this.sharedService.selectedTask.UserName = user.FirstName + ' ' + user.LastName;

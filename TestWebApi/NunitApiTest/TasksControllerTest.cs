@@ -43,12 +43,12 @@ namespace NunitApiTest
             TaskViewModel obj = new TaskViewModel {  TaskDesc = "TestTask1",  ParentID=null, ProjectID=1, StartDate = DateTime.Now.ToString(), EndDate = DateTime.Now.AddMonths(1).ToString(), Priority = 1, Status="Pending" , UserID =1};
             IHttpActionResult result = controller.PostTask(obj);
 
-            var createResult = result as CreatedAtRouteNegotiatedContentResult<TestWebApi.Task>;
+            var createResult = result as CreatedAtRouteNegotiatedContentResult<TaskViewModel>;
 
             int id = Convert.ToInt32(createResult.RouteValues["id"]);
 
 
-            var result2 = controller.GetTask(id) as OkNegotiatedContentResult<TestWebApi.Task>;
+            var result2 = controller.GetTask(id) as OkNegotiatedContentResult<TaskViewModel>;
             
           
             Assert.IsNotNull(result2);
@@ -65,14 +65,15 @@ namespace NunitApiTest
         {
             var controller = new TasksController();
 
-            var result = controller.GetTask(1) as OkNegotiatedContentResult<TestWebApi.Task>;
+            var result = controller.GetTask(1) as OkNegotiatedContentResult<TaskViewModel>;
             Assert.IsNotNull(result);
 
             result.Content.TaskDesc = "UpdatedTaskDesc";
+            result.Content.UserID = 1;
 
             var result2 = controller.PutTask(result.Content.TaskID, result.Content);
 
-            var result3 = controller.GetTask(1) as OkNegotiatedContentResult<TestWebApi.Task>;
+            var result3 = controller.GetTask(1) as OkNegotiatedContentResult<TaskViewModel>;
             Assert.IsNotNull(result3);
 
             Assert.AreEqual("UpdatedTaskDesc", result3.Content.TaskDesc);
@@ -90,7 +91,7 @@ namespace NunitApiTest
 
             var result2 = controller.EndTask(1);
 
-            var result3 = controller.GetTask(1) as OkNegotiatedContentResult<TestWebApi.Task>;
+            var result3 = controller.GetTask(1) as OkNegotiatedContentResult<TaskViewModel>;
             Assert.IsNotNull(result3);
 
             Assert.AreEqual("Completed", result3.Content.Status);

@@ -20,7 +20,7 @@ export class UserlistComponent implements OnInit {
     this._searchText = value;
     this.sharedService.filteredUsers = this.filterUsers(value);
   }
-  constructor(private sharedService: SharedService) { }
+  constructor(public sharedService: SharedService) { }
 
   filterUsers(searchText: string) {
     return this.sharedService.userList.filter(x => x.FirstName.toLowerCase().indexOf(searchText.toLowerCase()) !== -1);

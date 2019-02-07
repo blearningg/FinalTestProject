@@ -7,4 +7,6 @@ export class Project {
   TotalTasks: number;
   CompletedTasks: number;
   Suspended: boolean;
+  UserID: number;
+  UserName: string;
 }
