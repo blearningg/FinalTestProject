@@ -16,63 +16,73 @@ namespace NunitApiTest
     [TestFixture]
     public class ProjectsControllerTest
     {
-        [PerfBenchmark(NumberOfIterations = 5, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1000, TestMode = TestMode.Test, SkipWarmups = true)]
-        [CounterMeasurement("TestCounter")]
-        [GcMeasurement(GcMetric.TotalCollections, GcGeneration.Gen2)]
-        [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
-        [Test]
-        public void GetProejcts_NunitTest()
-        {
-           var controller = new ProjectsController();
-            List<ProjectViewModel> lstProject = new List<ProjectViewModel>();
-            lstProject = controller.GetProjects().ToList();
-            Assert.IsNotNull(lstProject);
-            controller.Dispose();
-        }
+        //private Counter _testCounter;
+        //[PerfSetup]
+        //public void Setup(BenchmarkContext context)
+        //{
+        //    _testCounter = context.GetCounter("ProjectTestCounter");
+
+        //}
+        //[PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1200, TestMode = TestMode.Test, SkipWarmups = true)]
+        //[CounterMeasurement("ProjectTestCounter")]
+        //[GcMeasurement(GcMetric.TotalCollections, GcGeneration.AllGc)]
+        //[MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
+        //[Test]
+        //public void GetProejcts_NunitTest()
+        //{
+        //    var controller = new ProjectsController();
+        //    List<ProjectViewModel> lstProject = new List<ProjectViewModel>();
+        //    lstProject = controller.GetProjects().ToList();
+        //    Assert.IsNotNull(lstProject);
+        //    controller.Dispose();
+        //    _testCounter.Increment();
+        //}
 
 
-        [PerfBenchmark(NumberOfIterations = 5, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1000, TestMode = TestMode.Test, SkipWarmups = true)]
-        [CounterMeasurement("TestCounter")]
-        [GcMeasurement(GcMetric.TotalCollections, GcGeneration.Gen2)]
-        [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
-        [Test]
-        public void AddGetProject_NunitTest()
-        {
-            var controller = new ProjectsController();
+        //[PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1200, TestMode = TestMode.Test, SkipWarmups = true)]
+        //[CounterMeasurement("ProjectTestCounter")]
+        //[GcMeasurement(GcMetric.TotalCollections, GcGeneration.AllGc)]
+        //[MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
+        //[Test]
+        //public void AddGetProject_NunitTest()
+        //{
+        //    var controller = new ProjectsController();
 
-            ProjectViewModel obj = new ProjectViewModel { ProjectName = "UniTestProject1", StartDate = DateTime.Now.ToString(), EndDate = DateTime.Now.AddMonths(1).ToString(), Priority = 1 , UserID= 1 };
-            IHttpActionResult result = controller.PostProject(obj);
-            var createResult = result as CreatedAtRouteNegotiatedContentResult<ProjectViewModel>;
+        //    ProjectViewModel obj = new ProjectViewModel { ProjectName = "UniTestProject1", StartDate = DateTime.Now.ToString(), EndDate = DateTime.Now.AddMonths(1).ToString(), Priority = 1, UserID = 1 };
+        //    IHttpActionResult result = controller.PostProject(obj);
+        //    var createResult = result as CreatedAtRouteNegotiatedContentResult<ProjectViewModel>;
 
-            int id = Convert.ToInt32(createResult.RouteValues["id"]);
-            var result2 = controller.GetProject(id) as OkNegotiatedContentResult<ProjectViewModel>;
-            Assert.IsNotNull(result2);
-            Assert.AreEqual(obj.ProjectName, result2.Content.ProjectName);
-            controller.Dispose();
-        }
+        //    int id = Convert.ToInt32(createResult.RouteValues["id"]);
+        //    var result2 = controller.GetProject(id) as OkNegotiatedContentResult<ProjectViewModel>;
+        //    Assert.IsNotNull(result2);
+        //    Assert.AreEqual(obj.ProjectName, result2.Content.ProjectName);
+        //    controller.Dispose();
+        //    _testCounter.Increment();
+        //}
 
-        [PerfBenchmark(NumberOfIterations = 5, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1000, TestMode = TestMode.Test, SkipWarmups = true)]
-        [CounterMeasurement("TestCounter")]
-        [GcMeasurement(GcMetric.TotalCollections, GcGeneration.Gen2)]
-        [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
-        [Test]
-        public void UpdateProject_NunitTest()
-        {
-            var controller = new ProjectsController();
+        //[PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1200, TestMode = TestMode.Test, SkipWarmups = true)]
+        //[CounterMeasurement("ProjectTestCounter")]
+        //[GcMeasurement(GcMetric.TotalCollections, GcGeneration.AllGc)]
+        //[MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
+        //[Test]
+        //public void UpdateProject_NunitTest()
+        //{
+        //    var controller = new ProjectsController();
 
-            var result = controller.GetProject(1) as OkNegotiatedContentResult<ProjectViewModel>;
-            Assert.IsNotNull(result);
+        //    var result = controller.GetProject(1) as OkNegotiatedContentResult<ProjectViewModel>;
+        //    Assert.IsNotNull(result);
 
-            result.Content.ProjectName = "UpdateUniteTest";
-            result.Content.UserID = 1;
-           var result2 = controller.PutProject(result.Content.ProjectID, result.Content);
+        //    result.Content.ProjectName = "UpdateUniteTest";
+        //    result.Content.UserID = 1;
+        //    var result2 = controller.PutProject(result.Content.ProjectID, result.Content);
 
-            var result3 = controller.GetProject(1) as OkNegotiatedContentResult<ProjectViewModel>;
-            Assert.IsNotNull(result3);
+        //    var result3 = controller.GetProject(1) as OkNegotiatedContentResult<ProjectViewModel>;
+        //    Assert.IsNotNull(result3);
 
-            Assert.AreEqual("UpdateUniteTest", result3.Content.ProjectName);
-            controller.Dispose();
-        }
+        //    Assert.AreEqual("UpdateUniteTest", result3.Content.ProjectName);
+        //    controller.Dispose();
+        //    _testCounter.Increment();
+        //}
 
 
     }

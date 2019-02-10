@@ -69,10 +69,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DictionaryMemoryTests.cs" />
-    <Compile Include="DictionaryThroughputTests.cs" />
-    <Compile Include="GarbageCollectionTests.cs" />
-    <Compile Include="PerformanceTestStuite.cs" />
     <Compile Include="ParentTasksControllerTest.cs" />
     <Compile Include="UsersControllerTest.cs" />
     <Compile Include="TasksControllerTest.cs" />
