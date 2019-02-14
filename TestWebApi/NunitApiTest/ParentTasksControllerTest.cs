@@ -16,6 +16,7 @@ namespace NunitApiTest
     public class ParentParentTasksControllerTest
     {
         private Counter _testCounter;
+
         [PerfSetup]
         public void Setup(BenchmarkContext context)
         {
@@ -46,7 +47,7 @@ namespace NunitApiTest
 
             controller.Dispose();
 
-            _testCounter.Increment();
+           // _testCounter.Increment();
         }
 
         // get test
@@ -61,7 +62,7 @@ namespace NunitApiTest
             var result = controller.GetParentTasks();
             Assert.IsNotNull(result);
             controller.Dispose();
-            _testCounter.Increment();
+           // _testCounter.Increment();
         }
 
     }

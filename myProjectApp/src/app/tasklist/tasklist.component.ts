@@ -33,6 +33,7 @@ export class TasklistComponent implements OnInit {
     this.sharedService.taskList = null;
     this.sharedService.filteredTasks = null;
     this.selectedProjectID = null;
+    this.sharedService.selectedTask = null;
     this.sharedService.getProject();
     }
 

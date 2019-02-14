@@ -37,6 +37,7 @@ export class ProjectlistComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sharedService.selectedTask = null;
       this.sharedService.getProject();
     }
     suspendProject(project: Project): void {

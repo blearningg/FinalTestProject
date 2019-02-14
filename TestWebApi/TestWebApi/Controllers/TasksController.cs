@@ -36,6 +36,7 @@ namespace TestWebApi.Controllers
                     obj.ParentTaskDesc = db.ParentTasks.Where(x => x.ParentID == task.ParentID).Select(x => x.TaskDesc).FirstOrDefault();
                     obj.ProjectName = db.Projects.Where(x => x.ProjectID == task.ProjectID).Select(x => x.ProjectName).FirstOrDefault();
                     obj.UserName = db.Users.Where(x => x.TaskID == task.TaskID).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    obj.UserID = db.Users.Where(x => x.TaskID == task.TaskID).Select(x => x.UserID).FirstOrDefault();
                     lstTask.Add(obj);
                 }
                
@@ -61,8 +62,7 @@ namespace TestWebApi.Controllers
             obj.ParentTaskDesc = db.ParentTasks.Where(x => x.ParentID == task.ParentID).Select(x => x.TaskDesc).FirstOrDefault();
             obj.ProjectName = db.Projects.Where(x => x.ProjectID == task.ProjectID).Select(x => x.ProjectName).FirstOrDefault();
             obj.UserName = db.Users.Where(x => x.TaskID == task.TaskID).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
-
-
+            obj.UserID = db.Users.Where(x => x.TaskID == task.TaskID).Select(x => x.UserID).FirstOrDefault();
             return Ok(obj);
         }
 
@@ -82,19 +82,19 @@ namespace TestWebApi.Controllers
             task.Status = taskViewModel.Status;
             db.Entry(task).State = EntityState.Modified;
 
-           // db.SaveChanges();
-
-            User objUser = db.Users.Find(taskViewModel.UserID);
-            objUser.TaskID = task.TaskID;
-
-            db.Entry(objUser).State = EntityState.Modified;
-
-           // db.SaveChanges();
-
-
             try
             {
                 db.SaveChanges();
+                if (taskViewModel.UserID != null)
+                {
+                    User objUser = db.Users.Find(taskViewModel.UserID);
+                    objUser.TaskID = task.TaskID;
+
+                    db.Entry(objUser).State = EntityState.Modified;
+
+                    db.SaveChanges();
+                }
+           
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -134,24 +134,24 @@ namespace TestWebApi.Controllers
         }
 
        
-        [ResponseType(typeof(Task))]
-        public IHttpActionResult EndTask(int id)
-        {
-            Task task = db.Tasks.Find(id);
-            task.Status = "Completed";
-            db.Entry(task).State = EntityState.Modified;
+        //[ResponseType(typeof(Task))]
+        //public IHttpActionResult EndTask(int id)
+        //{
+        //    Task task = db.Tasks.Find(id);
+        //    task.Status = "Completed";
+        //    db.Entry(task).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        throw;
+        //    }
 
-            return Ok(task);
-        }
+        //    return Ok(task);
+        //}
 
 
         protected override void Dispose(bool disposing)

@@ -58,6 +58,7 @@ selectUser(user: User): void {
   resetForm(form?: NgForm) {
     if (form != null) {
       form.reset();
+      this.isParentTask = false;
       this.btnSubmitText = 'Add Task';
     }
 
@@ -90,7 +91,6 @@ selectUser(user: User): void {
 }
 
   onSubmit(form: NgForm) {
-    console.log('submit call');
     if (form.value.TaskID == null) {
               if (this.isParentTask) {
                     this.sharedService.AddParentTask(form.value)

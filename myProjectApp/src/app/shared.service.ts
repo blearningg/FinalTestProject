@@ -14,8 +14,8 @@ import { Parenttask } from 'src/app/Models/parenttask.model';
   providedIn: 'root'
 })
 export class SharedService {
-   SERVICE_URL = 'http://localhost:9000/api/';
- //  SERVICE_URL = 'http://localhost:50243/api/';
+  // SERVICE_URL = 'http://localhost:9000/api/';
+  SERVICE_URL = 'http://localhost:50243/api/';
 
 
  // fmStartDateModal: any;
@@ -76,7 +76,6 @@ export class SharedService {
   }
 
   deleteUser(id: number) {
-    console.log('id=' + id );
    return this.httpClient.delete<User[]>(this.SERVICE_URL + '/Users/' + id);
   }
 
@@ -103,7 +102,6 @@ getProjectTasks(projectId: number) {
 }
 
 AddTask(task: Task) {
-  console.log('calling service addtask.');
 return this.httpClient.post(this.SERVICE_URL + '/Tasks', task);
 }
 

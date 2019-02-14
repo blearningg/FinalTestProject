@@ -16,82 +16,82 @@ namespace NunitApiTest
     [TestFixture]
     public class TasksControllerTest
     {
-        //private Counter _testCounter;
-        //[PerfSetup]
-        //public void Setup(BenchmarkContext context)
-        //{
-        //    _testCounter = context.GetCounter("TaskTestCounter");
+        private Counter _testCounter;
+        [PerfSetup]
+        public void Setup(BenchmarkContext context)
+        {
+            _testCounter = context.GetCounter("TaskTestCounter");
 
-        //}
-        //[PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1200, TestMode = TestMode.Test, SkipWarmups = true)]
-        //[CounterMeasurement("TaskTestCounter")]
-        //[GcMeasurement(GcMetric.TotalCollections, GcGeneration.AllGc)]
-        //[MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
-        //[Test]
-        //public void GetTasks_NunitTest()
-        //{
-        //    var controller = new TasksController();
-        //    List<TaskViewModel> lstTasks = new List<TaskViewModel>();
-        //    lstTasks = controller.GetTasks(1).ToList();
-        //    Assert.IsNotNull(lstTasks);
-        //    controller.Dispose();
+        }
+        [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1200, TestMode = TestMode.Test, SkipWarmups = true)]
+        [CounterMeasurement("TaskTestCounter")]
+        [GcMeasurement(GcMetric.TotalCollections, GcGeneration.AllGc)]
+        [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
+        [Test]
+        public void GetTasks_NunitTest()
+        {
+            var controller = new TasksController();
+            List<TaskViewModel> lstTasks = new List<TaskViewModel>();
+            lstTasks = controller.GetTasks(1).ToList();
+            Assert.IsNotNull(lstTasks);
+            controller.Dispose();
 
-        //    _testCounter.Increment();
-        //}
-
-
-
-        //[PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1200, TestMode = TestMode.Test, SkipWarmups = true)]
-        //[CounterMeasurement("TaskTestCounter")]
-        //[GcMeasurement(GcMetric.TotalCollections, GcGeneration.AllGc)]
-        //[MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
-        //[Test]
-        //public void AddTask_NunitTest()
-        //{
-        //    var controller = new TasksController();
-
-        //    TaskViewModel obj = new TaskViewModel { TaskDesc = "TestTask1", ParentID = null, ProjectID = 1, StartDate = DateTime.Now.ToString(), EndDate = DateTime.Now.AddMonths(1).ToString(), Priority = 1, Status = "Pending", UserID = 1 };
-        //    IHttpActionResult result = controller.PostTask(obj);
-
-        //    var createResult = result as CreatedAtRouteNegotiatedContentResult<TaskViewModel>;
-
-        //    int id = Convert.ToInt32(createResult.RouteValues["id"]);
+         //   _testCounter.Increment();
+        }
 
 
-        //    var result2 = controller.GetTask(id) as OkNegotiatedContentResult<TaskViewModel>;
+
+        [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1200, TestMode = TestMode.Test, SkipWarmups = true)]
+        [CounterMeasurement("TaskTestCounter")]
+        [GcMeasurement(GcMetric.TotalCollections, GcGeneration.AllGc)]
+        [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
+        [Test]
+        public void AddTask_NunitTest()
+        {
+            var controller = new TasksController();
+
+            TaskViewModel obj = new TaskViewModel { TaskDesc = "TestTask1", ParentID = null, ProjectID = 1, StartDate = DateTime.Now.ToString(), EndDate = DateTime.Now.AddMonths(1).ToString(), Priority = 1, Status = "Pending", UserID = 1 };
+            IHttpActionResult result = controller.PostTask(obj);
+
+            var createResult = result as CreatedAtRouteNegotiatedContentResult<TaskViewModel>;
+
+            int id = Convert.ToInt32(createResult.RouteValues["id"]);
 
 
-        //    Assert.IsNotNull(result2);
-        //    Assert.AreEqual(obj.TaskDesc, result2.Content.TaskDesc);
-        //    controller.Dispose();
-        //    _testCounter.Increment();
-        //}
+            var result2 = controller.GetTask(id) as OkNegotiatedContentResult<TaskViewModel>;
 
-        //[PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1200, TestMode = TestMode.Test, SkipWarmups = true)]
-        //[CounterMeasurement("TaskTestCounter")]
-        //[GcMeasurement(GcMetric.TotalCollections, GcGeneration.AllGc)]
-        //[MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
-        //[Test]
-        //public void UpdateTask_NunitTest()
-        //{
-        //    var controller = new TasksController();
 
-        //    var result = controller.GetTask(1) as OkNegotiatedContentResult<TaskViewModel>;
-        //    Assert.IsNotNull(result);
+            Assert.IsNotNull(result2);
+            Assert.AreEqual(obj.TaskDesc, result2.Content.TaskDesc);
+            controller.Dispose();
+          //  _testCounter.Increment();
+        }
 
-        //    result.Content.TaskDesc = "UpdatedTaskDesc";
-        //    result.Content.UserID = 1;
+        [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1200, TestMode = TestMode.Test, SkipWarmups = true)]
+        [CounterMeasurement("TaskTestCounter")]
+        [GcMeasurement(GcMetric.TotalCollections, GcGeneration.AllGc)]
+        [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
+        [Test]
+        public void UpdateTask_NunitTest()
+        {
+            var controller = new TasksController();
 
-        //    var result2 = controller.PutTask(result.Content.TaskID, result.Content);
+            var result = controller.GetTask(1) as OkNegotiatedContentResult<TaskViewModel>;
+            Assert.IsNotNull(result);
 
-        //    var result3 = controller.GetTask(1) as OkNegotiatedContentResult<TaskViewModel>;
-        //    Assert.IsNotNull(result3);
+            result.Content.TaskDesc = "UpdatedTaskDesc";
+            result.Content.UserID = 1;
 
-        //    Assert.AreEqual("UpdatedTaskDesc", result3.Content.TaskDesc);
-        //    controller.Dispose();
-        //    _testCounter.Increment();
+            var result2 = controller.PutTask(result.Content.TaskID, result.Content);
 
-        //}
+            var result3 = controller.GetTask(1) as OkNegotiatedContentResult<TaskViewModel>;
+            Assert.IsNotNull(result3);
+
+            Assert.AreEqual("UpdatedTaskDesc", result3.Content.TaskDesc);
+            controller.Dispose();
+         //   _testCounter.Increment();
+
+        }
 
         //[PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput, RunTimeMilliseconds = 1200, TestMode = TestMode.Test, SkipWarmups = true)]
         //[CounterMeasurement("TaskTestCounter")]

@@ -28,6 +28,7 @@ export class UserlistComponent implements OnInit {
 
   ngOnInit() {
       this.sharedService.getUsers();
+      this.sharedService.selectedTask = null;
     }
 
  deleteUser(id: number): void {
